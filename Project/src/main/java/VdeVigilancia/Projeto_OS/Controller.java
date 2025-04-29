@@ -12,12 +12,17 @@ import javafx.scene.text.FontPosture;
 public class Controller {
 
     @FXML
-    Button BotaoCadastro;
+    Button BotaoCadastro, BotaoEntrar;
 
     @FXML
 
     protected void abrirTelaCadastro (){
         changeScreen(BotaoCadastro, "/TelaCadastro.fxml");
+    }
+
+    @FXML
+    protected void abrirTelaInicio () {
+        changeScreen(BotaoEntrar, "/TelaInicio.fxml");
     }
 
 
