@@ -7,48 +7,43 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
-         <children>
-            <TextField layoutX="451.0" layoutY="146.0" prefHeight="25.0" prefWidth="350.0" style="-fx-background-color: #ffffff;">
-            <effect>
-               <Reflection fraction="0.54" topOpacity="0.21" />
-            </effect></TextField>
-            <TextField layoutX="451.0" layoutY="202.0" prefHeight="25.0" prefWidth="350.0" style="-fx-background-color: #ffffff;">
-            <effect>
-               <Reflection fraction="0.54" topOpacity="0.21" />
-            </effect></TextField>
-            <Label layoutX="452.0" layoutY="120.0" prefHeight="26.0" prefWidth="44.0" text="Login" textFill="WHITE">
-            <font>
-               <Font size="17.0" />
-            </font></Label>
-            <Label layoutX="451.0" layoutY="178.0" text="Senha" textFill="WHITE">
-            <font>
-               <Font size="17.0" />
-            </font>
-         </Label>
-         <Line endX="39.0" endY="-391.0" layoutX="338.0" layoutY="391.0" startX="39.0" startY="166.0" stroke="WHITE" />
-         <Line endX="109.0" layoutX="614.0" layoutY="333.0" startX="-85.0" stroke="WHITE" />
-         <Label layoutX="561.0" layoutY="471.0" opacity="0.55" text="V De Vigilancia" textFill="WHITE">
-            <font>
-               <Font size="23.0" />
-            </font>
-         </Label>
-         <Button fx:id="BotaoCadastro" layoutX="554.0" layoutY="354.0" mnemonicParsing="false" onAction="#abrirTelaCadastro" prefHeight="25.0" prefWidth="144.0" style="-fx-background-color: null;" text="Cadastro" textFill="WHITE">
-            <font>
-               <Font size="18.0" />
-            </font>
-         </Button>
+   <children>
+      <TextField layoutX="451.0" layoutY="146.0" prefHeight="25.0" prefWidth="350.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <Reflection fraction="0.54" topOpacity="0.21" />
+         </effect>
+      </TextField>
+      <TextField layoutX="451.0" layoutY="202.0" prefHeight="25.0" prefWidth="350.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <Reflection fraction="0.54" topOpacity="0.21" />
+         </effect>
+      </TextField>
+      <Label layoutX="452.0" layoutY="120.0" prefHeight="26.0" prefWidth="44.0" text="Email" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="451.0" layoutY="178.0" text="Senha" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Line endX="39.0" endY="-391.0" layoutX="338.0" layoutY="391.0" startX="39.0" startY="166.0" stroke="WHITE" />
+      <Line endX="109.0" layoutX="614.0" layoutY="333.0" startX="-85.0" stroke="WHITE" />
+      <Label layoutX="561.0" layoutY="471.0" opacity="0.55" text="V De Vigilancia" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
       <ImageView fitHeight="559.0" fitWidth="379.0" layoutX="-2.0" layoutY="-2.0" opacity="0.21">
          <image>
             <Image url="@../../../../../../Downloads/images.jpg" />
          </image>
       </ImageView>
-      <Circle fill="DODGERBLUE" layoutX="188.0" layoutY="227.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="160.0" layoutY="219.0" text="LOGO" textFill="WHITE" />
       <Label layoutX="74.0" layoutY="368.0" text="NOME DO APP" textFill="WHITE">
          <font>
             <Font size="34.0" />
@@ -64,5 +59,5 @@
             <Font size="18.0" />
          </font>
       </Button>
-         </children>
-      </AnchorPane>
+   </children>
+</AnchorPane>
