@@ -19,9 +19,13 @@ public class Controller {
 
     @FXML
     protected void abrirTelaCliente () {
-        changeScreen(BotaoCliente, "/TelaCliente.fxml");
+        changeScreen(BotaoCliente, "/TelaClientes.fxml");
     }
 
+    @FXML
+    protected void abrirTelaInicio () {
+        changeScreen(BotaoEntrar, "/TelaInicio.fxml");
+    }
 
 
     @FXML
@@ -30,15 +34,6 @@ public class Controller {
         changeScreen(BotaoCadastro, "/TelaCadastro.fxml");
     }
 
-    @FXML
-    protected void abrirTelaInicio () {
-        changeScreen(BotaoEntrar, "/TelaInicio.fxml");
-    }
-
-    @FXML
-    protected void abrirTelaCliente () {
-        changeScreen(BotaoCliente, "/TelaCliente.flxml");
-    }
 
 
     @FXML
@@ -52,7 +47,18 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+        @FXML
+        protected void changeScreen(MenuItem currentMenu, String screen) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(screen));
+                AnchorPane root = loader.load();
+                Scene scene = currentMenu.getParentPopup().getOwnerWindow().getScene();
+                scene.setRoot(root);
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 }

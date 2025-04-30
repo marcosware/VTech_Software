@@ -7,34 +7,55 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #464646;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TelaClientes">
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
    <children>
-      <TextField layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="312.0" />
+      <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
+         <image>
+            <Image url="@../../../../../../Downloads/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="338.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Downloads/images%20(1).png" />
          </image>
       </ImageView>
-      <TreeTableView layoutY="93.0" prefHeight="183.0" prefWidth="900.0">
+      <Label layoutX="53.0" layoutY="306.0" text="Id Cliente" textFill="#fffafa" />
+      <Label layoutX="59.0" layoutY="344.0" text="Nome" textFill="#fffafa" />
+      <Label layoutX="51.0" layoutY="463.0" prefHeight="17.0" prefWidth="51.0" text=" Telefone" textFill="#fffafa" />
+      <Label layoutX="64.0" layoutY="426.0" text="CPF" textFill="#fffafa" />
+      <Label layoutX="63.0" layoutY="384.0" text="Email" textFill="#fffafa" />
+      <TextField layoutX="114.0" layoutY="300.0" prefHeight="25.0" prefWidth="361.0" promptText="id" />
+      <TextField layoutX="114.0" layoutY="380.0" prefHeight="25.0" prefWidth="361.0" promptText="Email" />
+      <TextField layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="281.0" promptText="Nome" />
+      <TextField layoutX="114.0" layoutY="420.0" prefHeight="25.0" prefWidth="361.0" promptText="CPF" />
+      <TextField layoutX="114.0" layoutY="460.0" prefHeight="25.0" prefWidth="312.0" promptText="Telefone" />
+      <ImageView fitHeight="242.0" fitWidth="243.0" layoutX="649.0" layoutY="72.0">
+         <image>
+            <Image url="@LogoApp.png" />
+         </image>
+      </ImageView>
+      <TreeTableView layoutX="76.0" layoutY="72.0" prefHeight="200.0" prefWidth="525.0">
         <columns>
-          <TreeTableColumn prefWidth="173.0" text="id" />
-          <TreeTableColumn prefWidth="170.0" text="nome" />
-            <TreeTableColumn prefWidth="193.0" text="cpf" />
-            <TreeTableColumn prefWidth="175.0" text="email" />
-            <TreeTableColumn prefWidth="188.0" text="telefone" />
+          <TreeTableColumn prefWidth="88.0" text="id" />
+          <TreeTableColumn prefWidth="88.0" text="Nome" />
+            <TreeTableColumn prefWidth="88.0" text="CPF" />
+            <TreeTableColumn prefWidth="88.0" text="Email" />
+            <TreeTableColumn prefWidth="88.0" text="Telefone" />
         </columns>
       </TreeTableView>
-      <Label layoutX="18.0" layoutY="307.0" text="Id Cliente" textFill="#fffafa" />
-      <Label layoutX="24.0" layoutY="349.0" text="*Nome" textFill="#fffafa" />
-      <Label layoutX="11.0" layoutY="477.0" prefHeight="17.0" prefWidth="51.0" text="*Telefone" textFill="#fffafa" />
-      <Label layoutX="24.0" layoutY="391.0" text="*CPF" textFill="#fffafa" />
-      <Label layoutX="24.0" layoutY="434.0" text="Email" textFill="#fffafa" />
-      <TextField layoutX="74.0" layoutY="303.0" prefHeight="25.0" prefWidth="632.0" />
-      <TextField layoutX="74.0" layoutY="345.0" prefHeight="25.0" prefWidth="632.0" />
-      <TextField layoutX="74.0" layoutY="387.0" prefHeight="25.0" prefWidth="632.0" />
-      <TextField layoutX="74.0" layoutY="430.0" prefHeight="25.0" prefWidth="632.0" />
-      <TextField layoutX="74.0" layoutY="473.0" prefHeight="25.0" prefWidth="312.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="108.0" layoutX="670.0" layoutY="415.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label layoutX="681.0" layoutY="434.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="681.0" layoutY="472.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
