@@ -39,7 +39,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="Cadastro">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
+                <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" text="Usuário" />
+                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" text="OS" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Relatorio">

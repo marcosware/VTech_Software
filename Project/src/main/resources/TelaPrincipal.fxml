@@ -44,11 +44,6 @@
             <Image url="@../../../../../../Downloads/images.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="74.0" layoutY="368.0" text="NOME DO APP" textFill="WHITE">
-         <font>
-            <Font size="34.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="506.0" layoutY="469.0">
          <image>
             <Image url="@../../../../../../Downloads/icon.png" />

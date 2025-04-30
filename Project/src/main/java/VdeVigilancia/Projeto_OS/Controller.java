@@ -15,6 +15,16 @@ public class Controller {
     Button BotaoCadastro, BotaoEntrar;
 
     @FXML
+    MenuItem BotaoCliente, BotaoUsuario, BotaoOS;
+
+    @FXML
+    protected void abrirTelaCliente () {
+        changeScreen(BotaoCliente, "/TelaCliente.fxml");
+    }
+
+
+
+    @FXML
 
     protected void abrirTelaCadastro (){
         changeScreen(BotaoCadastro, "/TelaCadastro.fxml");
@@ -23,6 +33,11 @@ public class Controller {
     @FXML
     protected void abrirTelaInicio () {
         changeScreen(BotaoEntrar, "/TelaInicio.fxml");
+    }
+
+    @FXML
+    protected void abrirTelaCliente () {
+        changeScreen(BotaoCliente, "/TelaCliente.flxml");
     }
 
 
