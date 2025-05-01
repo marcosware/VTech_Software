@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -14,7 +18,7 @@
    <children>
       <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
          <image>
-            <Image url="@../../../../../../Downloads/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
+            <Image url="@fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="338.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
@@ -57,5 +61,28 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
+      <MenuBar layoutX="39.0" layoutY="25.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Cadastro">
+               <items>
+                  <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
+                  <MenuItem mnemonicParsing="false" text="OS" />
+                  <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" text="Usuário" />
+                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" text="OS" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatorio">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Relatorio" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sobre">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>
