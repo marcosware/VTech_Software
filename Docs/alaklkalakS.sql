@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Funcionarios` (
   `nome_Funcionario` VARCHAR(50) NOT NULL,
   `cpf` CHAR(11) NOT NULL,
   `telefone` CHAR(11) NOT NULL,
-  UNIQUE INDEX `ID_Funcionarios_UNIQUE` (`ID_Funcionarios` ASC) VISIBLE,
-  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) VISIBLE,
+  UNIQUE INDEX `ID_Funcionarios_UNIQUE` (`ID_Funcionarios` ASC),
+  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) ,
   PRIMARY KEY (`ID_Funcionarios`))
 ENGINE = InnoDB;
 
@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Clientes` (
   `nome_clientes` VARCHAR(50) NOT NULL,
   `cpf` CHAR(11) NOT NULL,
   `telefone_Cliente` CHAR(11) NOT NULL,
-  UNIQUE INDEX `idClientes_UNIQUE` (`idClientes` ASC) VISIBLE,
-  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) VISIBLE,
+  UNIQUE INDEX `idClientes_UNIQUE` (`idClientes` ASC) ,
+  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC),
   PRIMARY KEY (`idClientes`))
 ENGINE = InnoDB;
 
@@ -51,10 +51,10 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Produtos_Clientes` (
   `modelo` VARCHAR(50) NOT NULL,
   `numero_Serie` VARCHAR(45) NOT NULL,
   `cliente_Produto` INT NOT NULL,
-  UNIQUE INDEX `idProdutos_UNIQUE` (`idAparelhos` ASC) VISIBLE,
+  UNIQUE INDEX `idProdutos_UNIQUE` (`idAparelhos` ASC) ,
   PRIMARY KEY (`idAparelhos`),
-  UNIQUE INDEX `numero_Serie_UNIQUE` (`numero_Serie` ASC) VISIBLE,
-  INDEX `clientes _idx` (`cliente_Produto` ASC) VISIBLE,
+  UNIQUE INDEX `numero_Serie_UNIQUE` (`numero_Serie` ASC) ,
+  INDEX `clientes _idx` (`cliente_Produto` ASC) ,
   CONSTRAINT `cliente_Produto`
     FOREIGN KEY (`cliente_Produto`)
     REFERENCES `Ordens_Serviço_Assistencia`.`Clientes` (`idClientes`)
@@ -74,9 +74,9 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Orcamentos` (
   `Valor_estimado` DECIMAL(10,2) NOT NULL,
   `OS` INT NOT NULL,
   PRIMARY KEY (`id_OrCamentos`),
-  UNIQUE INDEX `idOrçamentos_UNIQUE` (`id_OrCamentos` ASC) VISIBLE,
-  INDEX `cliente_idx` (`Cliente` ASC) VISIBLE,
-  INDEX `OS_idx` (`OS` ASC) VISIBLE,
+  UNIQUE INDEX `idOrçamentos_UNIQUE` (`id_OrCamentos` ASC),
+  INDEX `cliente_idx` (`Cliente` ASC) ,
+  INDEX `OS_idx` (`OS` ASC) ,
   CONSTRAINT `cliente`
     FOREIGN KEY (`Cliente`)
     REFERENCES `Ordens_Serviço_Assistencia`.`Clientes` (`idClientes`)
@@ -104,11 +104,11 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`OS` (
   `Funcionario` INT NOT NULL,
   `Orcamento` INT NOT NULL,
   PRIMARY KEY (`id_OS`),
-  UNIQUE INDEX `id_OS_UNIQUE` (`id_OS` ASC) VISIBLE,
-  INDEX `Clientes _idx` (`Cliente` ASC) VISIBLE,
-  INDEX `Aparelhos _idx` (`Aparelhos` ASC) VISIBLE,
-  INDEX `Funcionarios _idx` (`Funcionario` ASC) VISIBLE,
-  INDEX `Orcamento_idx` (`Orcamento` ASC) VISIBLE,
+  UNIQUE INDEX `id_OS_UNIQUE` (`id_OS` ASC) ,
+  INDEX `Clientes _idx` (`Cliente` ASC) ,
+  INDEX `Aparelhos _idx` (`Aparelhos` ASC) ,
+  INDEX `Funcionarios _idx` (`Funcionario` ASC),
+  INDEX `Orcamento_idx` (`Orcamento` ASC) ,
   CONSTRAINT `Clientes `
     FOREIGN KEY (`Cliente`)
     REFERENCES `Ordens_Serviço_Assistencia`.`Clientes` (`cpf`)
@@ -131,6 +131,11 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`OS` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+alter table OS
+	DROP COLUMN STATUS;
+    
+
+
 
 -- -----------------------------------------------------
 -- Table `Ordens_Serviço_Assistencia`.`Estoque_Pecas`
@@ -141,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Estoque_Pecas` (
   `Quantidade` INT NOT NULL,
   `Fornecedor` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id_Peca`),
-  UNIQUE INDEX `id_Peca_UNIQUE` (`id_Peca` ASC) VISIBLE)
+  UNIQUE INDEX `id_Peca_UNIQUE` (`id_Peca` ASC))
 ENGINE = InnoDB;
 
 
@@ -157,9 +162,9 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Itens_Orcamento` (
   `Subtotal` DECIMAL(10,2) NOT NULL,
   `Item` INT NOT NULL,
   PRIMARY KEY (`id_Itens_Orcamento`),
-  UNIQUE INDEX `id_Itens_Orcamento_UNIQUE` (`id_Itens_Orcamento` ASC) VISIBLE,
-  INDEX `Orcamento _idx` (`Orcamento` ASC) VISIBLE,
-  INDEX `item_idx` (`Item` ASC) VISIBLE,
+  UNIQUE INDEX `id_Itens_Orcamento_UNIQUE` (`id_Itens_Orcamento` ASC),
+  INDEX `Orcamento _idx` (`Orcamento` ASC),
+  INDEX `item_idx` (`Item` ASC) ,
   CONSTRAINT `Orcamento `
     FOREIGN KEY (`Orcamento`)
     REFERENCES `Ordens_Serviço_Assistencia`.`Orcamentos` (`id_OrCamentos`)
@@ -183,8 +188,8 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Historico_OS` (
   `evento` VARCHAR(100) NOT NULL,
   `obs` TEXT NOT NULL,
   PRIMARY KEY (`idHistorico_OS`),
-  UNIQUE INDEX `idHistorico_OS_UNIQUE` (`idHistorico_OS` ASC) VISIBLE,
-  INDEX `OS_idx` (`OS` ASC) VISIBLE,
+  UNIQUE INDEX `idHistorico_OS_UNIQUE` (`idHistorico_OS` ASC),
+  INDEX `OS_idx` (`OS` ASC) ,
   CONSTRAINT `OS`
     FOREIGN KEY (`OS`)
     REFERENCES `Ordens_Serviço_Assistencia`.`OS` (`id_OS`)
@@ -203,8 +208,8 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Pagamentos` (
   `valor` DECIMAL(10,2) NOT NULL,
   `forma_Pagamento` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`idPagamentos`),
-  UNIQUE INDEX `idPagamentos_UNIQUE` (`idPagamentos` ASC) VISIBLE,
-  INDEX `OS_idx` (`OS` ASC) VISIBLE,
+  UNIQUE INDEX `idPagamentos_UNIQUE` (`idPagamentos` ASC) ,
+  INDEX `OS_idx` (`OS` ASC),
   CONSTRAINT `OS`
     FOREIGN KEY (`OS`)
     REFERENCES `Ordens_Serviço_Assistencia`.`OS` (`id_OS`)
@@ -224,10 +229,10 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Comprovantes` (
   `Observacao` TEXT NULL,
   `OS_comprovante` INT NOT NULL,
   PRIMARY KEY (`id_Comprovantes`),
-  UNIQUE INDEX `id_Comprovantes_UNIQUE` (`id_Comprovantes` ASC) VISIBLE,
-  INDEX `cliente_idx` (`Cliente` ASC) VISIBLE,
-  INDEX `valor _idx` (`valor` ASC) VISIBLE,
-  INDEX `OS_idx` (`OS_comprovante` ASC) VISIBLE,
+  UNIQUE INDEX `id_Comprovantes_UNIQUE` (`id_Comprovantes` ASC) ,
+  INDEX `cliente_idx` (`Cliente` ASC) ,
+  INDEX `valor _idx` (`valor` ASC) ,
+  INDEX `OS_idx` (`OS_comprovante` ASC),
   CONSTRAINT `cliente`
     FOREIGN KEY (`Cliente`)
     REFERENCES `Ordens_Serviço_Assistencia`.`Clientes` (`idClientes`)
@@ -245,6 +250,24 @@ CREATE TABLE IF NOT EXISTS `Ordens_Serviço_Assistencia`.`Comprovantes` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+create table usuarios(
+	id_usuario int primary key auto_increment not null unique,
+    nome_usuario varchar (100) not null,
+    email_institucional varchar (150),
+    codigo_registro varchar (10)
+    );
+
+
+SELECT * FROM CLIENTES;
+select * from FUNCIONARIOS;
+select * from pagamentos;
+select * from OS;
+select * from historico_os;
+select * from comprovantes;
+select * from itens_orcamento;
+select * from estoque_pecas;
+select * from Produtos_clientes;
+select * from usuarios;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
