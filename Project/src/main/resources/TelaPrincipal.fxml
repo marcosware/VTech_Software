@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="558.0" fitWidth="377.0" layoutX="-1.0" opacity="0.25">
          <image>
-            <Image url="@FundoPara.jpg" />
+            <Image url="@Imagens/FundoPara.jpg" />
          </image>
       </ImageView>
       <TextField layoutX="451.0" layoutY="146.0" prefHeight="25.0" prefWidth="350.0" promptText="email" style="-fx-background-color: #ffffff;" />
@@ -37,7 +37,7 @@
       </Button>
       <ImageView fitHeight="48.0" fitWidth="54.0" layoutX="521.0" layoutY="468.0">
          <image>
-            <Image url="@icon.png" />
+            <Image url="@Imagens/icon.png" />
          </image>
       </ImageView>
       <Label layoutX="588.0" layoutY="478.0" text="V de Vigiliancia" textFill="WHITE">
@@ -47,7 +47,7 @@
       </Label>
       <ImageView fitHeight="425.0" fitWidth="377.0" layoutX="-1.0" layoutY="78.0">
          <image>
-            <Image url="@LogoApp.png" />
+            <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
    </children>

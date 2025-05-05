@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
          <image>
-            <Image url="@fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
+            <Image url="@Imagens/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="338.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
@@ -38,7 +38,7 @@
       <TextField layoutX="114.0" layoutY="460.0" prefHeight="25.0" prefWidth="312.0" promptText="Telefone" />
       <ImageView fitHeight="242.0" fitWidth="243.0" layoutX="649.0" layoutY="72.0">
          <image>
-            <Image url="@LogoApp.png" />
+            <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
       <TreeTableView layoutX="76.0" layoutY="72.0" prefHeight="200.0" prefWidth="525.0">

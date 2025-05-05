@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
          <image>
-            <Image url="@fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
+            <Image url="@Imagens/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
          </image>
       </ImageView>
       <Label layoutX="61.0" layoutY="79.0" prefHeight="17.0" prefWidth="15.0" text="ID" textFill="WHITE">
@@ -67,7 +67,7 @@
       <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
       <ImageView fitHeight="242.0" fitWidth="243.0" layoutX="649.0" layoutY="72.0">
          <image>
-            <Image url="@LogoApp.png" />
+            <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
       <MenuBar layoutX="39.0" layoutY="25.0">
@@ -115,17 +115,17 @@
       </Label>
       <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="96.0" layoutY="434.0">
          <image>
-            <Image url="@MAIS.png" />
+            <Image url="@Imagens/MAIS.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="212.0" layoutY="433.0">
          <image>
-            <Image url="@EDITAR.png" />
+            <Image url="@Imagens/EDITAR.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="323.0" layoutY="433.0">
          <image>
-            <Image url="@Excluir.png" />
+            <Image url="@Imagens/Excluir.png" />
          </image>
       </ImageView>
    </children>
