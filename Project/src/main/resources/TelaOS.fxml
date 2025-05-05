@@ -129,5 +129,11 @@
             <Font size="17.0" />
          </font>
       </Label>
+      <Button fx:id="APAGAR1" layoutX="385.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" textFill="WHITE" />
+      <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="393.0" layoutY="457.0">
+         <image>
+            <Image url="@Imagens/impressora.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
