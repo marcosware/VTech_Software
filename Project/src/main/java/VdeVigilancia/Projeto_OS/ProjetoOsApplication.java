@@ -19,7 +19,6 @@ public class ProjetoOsApplication extends Application {
 		AnchorPane root = fxmlLoader.load();
 		Scene scene = new Scene(root);
 		stage.setTitle("Hello!");
-
 		stage.setScene(scene);
 		stage.show();
 	}

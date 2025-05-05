@@ -14,17 +14,6 @@
 
 <AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="108.0" layoutX="670.0" layoutY="415.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-      <Label layoutX="681.0" layoutY="434.0" text="Usuário:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="681.0" layoutY="472.0" text="Data:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ButtonBar layoutX="53.0" layoutY="193.0" prefHeight="40.0" prefWidth="200.0" />
       <MenuBar layoutX="39.0" layoutY="25.0">
         <menus>
@@ -59,5 +48,26 @@
             <Image url="@fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
          </image>
       </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="126.0" layoutX="680.0" layoutY="397.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label layoutX="688.0" layoutY="411.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="688.0" layoutY="463.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="Usuario" layoutX="688.0" layoutY="437.0" prefHeight="26.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Data" layoutX="688.0" layoutY="486.0" prefHeight="21.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -50,17 +50,6 @@
             <TreeTableColumn prefWidth="88.0" text="Telefone" />
         </columns>
       </TreeTableView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="108.0" layoutX="670.0" layoutY="415.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-      <Label layoutX="681.0" layoutY="434.0" text="Usuário:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="681.0" layoutY="472.0" text="Data:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
       <MenuBar layoutX="39.0" layoutY="25.0">
          <menus>
@@ -84,5 +73,26 @@
             </Menu>
          </menus>
       </MenuBar>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="126.0" layoutX="680.0" layoutY="397.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label layoutX="688.0" layoutY="411.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="688.0" layoutY="463.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="Usuario" layoutX="688.0" layoutY="437.0" prefHeight="26.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Data" layoutX="688.0" layoutY="486.0" prefHeight="21.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

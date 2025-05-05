@@ -7,7 +7,6 @@ import javafx.scene.layout.AnchorPane;
 
 
 public class Controller {
-
     @FXML
     Button BotaoCadastro, BotaoEntrar;
 
@@ -29,16 +28,6 @@ public class Controller {
 
     @FXML
     protected void abrirTelaUsuario () {changeScreen(BotaoUsuario, "/TelaUsuario.fxml"); }
-
-
-
-    @FXML
-
-    protected void abrirTelaCadastro (){
-        changeScreen(BotaoCadastro, "/TelaCadastro.fxml");
-    }
-
-
 
     @FXML
     protected void changeScreen(Button currentButton, String screen) {
