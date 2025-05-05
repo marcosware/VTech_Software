@@ -4,9 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 
 
 public class Controller {
@@ -26,6 +23,13 @@ public class Controller {
     protected void abrirTelaInicio () {
         changeScreen(BotaoEntrar, "/TelaInicio.fxml");
     }
+
+    @FXML
+    protected void abrirTelaOS () {changeScreen(BotaoOS, "/TelaOS.fxml"); }
+
+    @FXML
+    protected void abrirTelaUsuario () {changeScreen(BotaoUsuario, "/TelaUsuario.fxml"); }
+
 
 
     @FXML

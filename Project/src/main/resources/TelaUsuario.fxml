@@ -2,56 +2,106 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="540.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TelaUsuario">
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
    <children>
-      <Label layoutX="114.0" layoutY="79.0" prefHeight="17.0" prefWidth="15.0" text="ID">
+      <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
+         <image>
+            <Image url="@fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="61.0" layoutY="79.0" prefHeight="17.0" prefWidth="15.0" text="ID" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="359.0" layoutY="75.0" mnemonicParsing="false" text="Pesquisa">
+      <Button layoutX="234.0" layoutY="75.0" mnemonicParsing="false" text="Pesquisa">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField layoutX="194.0" layoutY="75.0" prefHeight="25.0" prefWidth="104.0" />
-      <Label layoutX="113.0" layoutY="135.0" text="Nome">
+      <TextField layoutX="94.0" layoutY="75.0" prefHeight="25.0" prefWidth="104.0" />
+      <Label layoutX="59.0" layoutY="131.0" text="Nome" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="194.0" layoutY="131.0" prefHeight="25.0" prefWidth="558.0" />
-      <TextField layoutX="195.0" layoutY="191.0" prefHeight="25.0" prefWidth="244.0" />
-      <Label layoutX="114.0" layoutY="195.0" text="Telefone">
+      <TextField layoutX="111.0" layoutY="127.0" prefHeight="25.0" prefWidth="510.0" />
+      <TextField layoutX="125.0" layoutY="191.0" prefHeight="25.0" prefWidth="153.0" />
+      <Label layoutX="61.0" layoutY="195.0" text="Telefone" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="489.0" layoutY="195.0" text="Login">
+      <Label layoutX="350.0" layoutY="195.0" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="113.0" layoutY="281.0" text="Senha">
+      <Label layoutX="59.0" layoutY="273.0" text="Senha" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="490.0" layoutY="281.0" text="Perfil">
+      <Label layoutX="351.0" layoutY="275.0" text="Perfil" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="194.0" layoutY="277.0" prefHeight="25.0" prefWidth="244.0" />
-      <TextField layoutX="538.0" layoutY="277.0" prefHeight="25.0" prefWidth="214.0" />
-      <Button layoutX="194.0" layoutY="353.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" text="Adicionar" />
-      <TextField layoutX="538.0" layoutY="191.0" prefHeight="25.0" prefWidth="214.0" />
-      <Button layoutX="390.0" layoutY="353.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" text="editar" />
-      <Button layoutX="598.0" layoutY="353.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" text="apagar" />
+      <TextField layoutX="125.0" layoutY="274.0" prefHeight="25.0" prefWidth="153.0" />
+      <TextField layoutX="397.0" layoutY="274.0" prefHeight="25.0" prefWidth="237.0" />
+      <Button layoutX="86.0" layoutY="374.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" text="Adicionar" />
+      <TextField layoutX="397.0" layoutY="191.0" prefHeight="25.0" prefWidth="237.0" />
+      <Button layoutX="246.0" layoutY="374.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" text="editar" />
+      <Button layoutX="397.0" layoutY="374.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" text="apagar" />
+      <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="108.0" layoutX="670.0" layoutY="415.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label layoutX="681.0" layoutY="434.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="681.0" layoutY="470.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="242.0" fitWidth="243.0" layoutX="649.0" layoutY="72.0">
+         <image>
+            <Image url="@LogoApp.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutX="39.0" layoutY="25.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Cadastro">
+               <items>
+                  <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
+                  <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" onAction="#abrirTelaUsuario" text="Usuário" />
+                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" onAction="#abrirTelaOS" text="OS" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatorio">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Relatório cliente" />
+                  <MenuItem mnemonicParsing="false" text="Serviços" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sobre">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

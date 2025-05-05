@@ -67,14 +67,14 @@
             <Menu mnemonicParsing="false" text="Cadastro">
                <items>
                   <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
-                  <MenuItem mnemonicParsing="false" text="OS" />
-                  <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" text="Usuário" />
-                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" text="OS" />
+                  <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" onAction="#abrirTelaUsuario" text="Usuário" />
+                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" onAction="#abrirTelaOS" text="OS" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Relatorio">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Relatorio" />
+                  <MenuItem mnemonicParsing="false" text="Relatório cliente" />
+                  <MenuItem mnemonicParsing="false" text="Serviços" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Sobre">
