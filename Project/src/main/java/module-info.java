@@ -10,6 +10,8 @@ module VdeVigilancia.Projeto_OS {
 
     requires spring.boot.autoconfigure;
     requires spring.boot;
+    requires java.sql;
+    requires spring.data.relational;
 
     exports VdeVigilancia.Projeto_OS;
     opens VdeVigilancia.Projeto_OS to javafx.fxml;
