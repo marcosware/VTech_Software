@@ -12,6 +12,7 @@ module VdeVigilancia.Projeto_OS {
     requires spring.boot;
     requires java.sql;
     requires spring.data.relational;
+    requires java.persistence;
 
     exports VdeVigilancia.Projeto_OS;
     opens VdeVigilancia.Projeto_OS to javafx.fxml;
