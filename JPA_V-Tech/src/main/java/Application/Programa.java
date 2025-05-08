@@ -1,6 +1,8 @@
 package Application;
 
+import Dominio.Aparelhos_Clientes;
 import Dominio.Clientes;
+import Dominio.OS;
 import Dominio.Usuarios;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,12 +18,17 @@ public class Programa {
 
         Clientes services = new Clientes();
         Usuarios users = new Usuarios();
+        Aparelhos_Clientes aparelhos = new Aparelhos_Clientes();
+        OS os = new OS();
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_V_Tech");
         EntityManager em = emf.createEntityManager();
 
         System.out.println("----------------------------- MENU OPÇÕES -----------------------------");
         System.out.println("1 - Inserir Clientes");
         System.out.println("2 - Inserir Usuário");
+        System.out.println("3 - Cadastrar Aparelhos");
+        System.out.println("4 - Criar OS");
         System.out.println("0 - Sair");
         try {
             while (true) {
@@ -36,6 +43,10 @@ public class Programa {
                     }
                 } else if (opção.equals("2")) {
                     users.inserirUsuarios(em);
+                }else if (opção.equals("3")) {
+                    aparelhos.cadastrarAparelhos(em);
+                }else if (opção.equals("4")){
+                    os.criarOSAutomatica(em, new Clientes(), new Aparelhos_Clientes(), "" );
                 } else if (opção.equals("0")) {
                     break;
                 } else {

@@ -2,6 +2,8 @@ package Dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import static Application.Programa.sc;
 
@@ -9,11 +11,40 @@ import static Application.Programa.sc;
 public class Clientes implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String cpf;
     private String telefone;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Aparelhos_Clientes> aparelhos;
+
+    @OneToMany (mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List <OS> ordemServico = new ArrayList<>();
+
+    public List<OS> getOrdemServico(){
+        return  ordemServico;
+    }
+
+    public void setOrdemServico(List<OS> ordemServico) {
+        this.ordemServico = ordemServico;
+    }
+
+    public void addOS (OS os){
+        if (this.ordemServico == null){
+            this.ordemServico = new ArrayList<>();
+        }
+        this.ordemServico.add(os);
+        os.setCliente(this);
+    }
+
+    public void removeOS (OS os) {
+        if (this.ordemServico != null){
+            this.ordemServico.remove(os);
+            os.setCliente(null);
+        }
+    }
 
     public Clientes() {
     }
@@ -46,7 +77,7 @@ public class Clientes implements Serializable {
     }
 
     public void setCpf(String cpf) throws IllegalArgumentException {
-        if (cpf == null || !cpf.matches("\\d{11}")){
+        if (cpf == null || !cpf.matches("\\d{11}")) {
             throw new IllegalArgumentException("CPF inválido");
         }
         this.cpf = cpf;
@@ -56,14 +87,22 @@ public class Clientes implements Serializable {
         return telefone;
     }
 
-    public void setTelefone(String telefone) throws IllegalArgumentException{
-        if (telefone == null || telefone.matches("\\d{11}")){
+    public void setTelefone(String telefone) throws IllegalArgumentException {
+        if (telefone == null || telefone.matches("\\d{11}")) {
             throw new IllegalArgumentException("Telefone inválido");
         }
         this.telefone = telefone;
     }
 
-    public void inserirCliente (EntityManager em){
+    public List<Aparelhos_Clientes> getAparelhos() {
+        return aparelhos;
+    }
+
+    public void setAparelhos(List<Aparelhos_Clientes> aparelhos) {
+        this.aparelhos = aparelhos;
+    }
+
+    public void inserirCliente(EntityManager em) {
 
         System.out.println("Nome: ");
         String nome = sc.nextLine();
@@ -88,8 +127,13 @@ public class Clientes implements Serializable {
 
     }
 
-
-
+    public void addAparelhos(Aparelhos_Clientes aparelho) {
+        if(this.aparelhos == null){
+            this.aparelhos = new ArrayList<>();
+        }
+        this.aparelhos.add(aparelho);
+        aparelho.setCliente(this);
+    }
 
     @Override
     public String toString() {
@@ -100,4 +144,5 @@ public class Clientes implements Serializable {
                 ", telefone='" + telefone + '\'' +
                 '}';
     }
+
 }

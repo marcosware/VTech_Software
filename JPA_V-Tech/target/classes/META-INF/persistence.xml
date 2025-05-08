@@ -8,7 +8,7 @@
     <persistence-unit name="JPA_V_Tech" transaction-type="RESOURCE_LOCAL">
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://127.0.0.1:3306/Ordem_Servico ?useSSL=false&amp;serverTimezone=UTC" />
+                      value="jdbc:mysql://127.0.0.1:3306/banco_Vtech?useSSL=false&amp;serverTimezone=UTC" />
 
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.user" value="root" />
