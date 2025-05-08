@@ -1,4 +1,4 @@
-package VdeVigilancia.Projeto_OS.BANCO;
+/*package VdeVigilancia.Projeto_OS.BANCO;
 
 public class Clientes {
     private int id;
@@ -8,7 +8,7 @@ public class Clientes {
     private String Telefone;
 
 
-    public Clientes(int id, String nome, String email, String CPF, String telefone) {
+    public void clientes(int id, String nome, String email, String CPF, String telefone) {
         this.id = id;
         Nome = nome;
         Email = email;
@@ -56,3 +56,4 @@ public class Clientes {
         Nome = nome;
     }
 }
+*/

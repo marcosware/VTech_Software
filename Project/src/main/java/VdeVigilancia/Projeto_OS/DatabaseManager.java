@@ -1,4 +1,4 @@
-package VdeVigilancia.Projeto_OS;
+/*package VdeVigilancia.Projeto_OS;
 
 import org.springframework.data.relational.core.sql.SQL;
 
@@ -18,3 +18,5 @@ public class DatabaseManager {
         }
     }
 }
+
+ */

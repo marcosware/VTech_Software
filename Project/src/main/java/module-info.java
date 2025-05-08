@@ -13,7 +13,12 @@ module VdeVigilancia.Projeto_OS {
     requires java.sql;
     requires spring.data.relational;
     requires java.persistence;
-
+    requires org.hibernate.orm.core;
     exports VdeVigilancia.Projeto_OS;
     opens VdeVigilancia.Projeto_OS to javafx.fxml;
+    opens VdeVigilancia.Projeto_OS.Dominio to org.hibernate.orm.core;
+
+
+
+
 }

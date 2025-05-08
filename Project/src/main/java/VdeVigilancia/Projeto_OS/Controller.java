@@ -1,17 +1,33 @@
 package VdeVigilancia.Projeto_OS;
+import VdeVigilancia.Projeto_OS.BANCO.Clientes;
+import VdeVigilancia.Projeto_OS.DAO.DAO_Cliente;
+import VdeVigilancia.Projeto_OS.Dominio.Clientes;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import javax.persistence.EntityManager;
+
 
 public class Controller {
     @FXML
-    Button BotaoCadastro, BotaoEntrar;
+    Button BotaoCadastrarCliente, BotaoEntrar;
 
     @FXML
     MenuItem BotaoCliente, BotaoUsuario, BotaoOS;
+
+    @FXML
+    protected void CadastrarCliente () {
+
+
+    }
+    @FXML private TextField NomeCliente;
+    @FXML private TextField EmailCliente;
+    @FXML private TextField CPFCliente;
+    @FXML private TextField TelefoneCliente;
+
 
     @FXML
     protected void abrirTelaCliente () {

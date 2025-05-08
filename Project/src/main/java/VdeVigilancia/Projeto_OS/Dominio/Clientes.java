@@ -108,16 +108,9 @@ public class Clientes implements Serializable {
     public void inserirCliente(EntityManager em) {
 
         System.out.println("Nome: ");
-        String nome = sc.nextLine();
-
         System.out.println("Cpf: ");
-        String cpf = sc.nextLine();
-
         System.out.println("Telefone: ");
-        String telefone = sc.nextLine();
-
         Clientes clientes = new Clientes();
-
         clientes.setNome(nome);
         clientes.setCpf(cpf);
         clientes.setTelefone(telefone);
