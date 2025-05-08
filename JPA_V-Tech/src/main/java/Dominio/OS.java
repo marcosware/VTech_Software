@@ -10,7 +10,7 @@ import static Application.Programa.sc;
 
 @Entity
 
-public class OS implements Serializable {
+public class  OS implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
