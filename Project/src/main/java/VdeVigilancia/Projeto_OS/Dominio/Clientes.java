@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
+import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.sc;
 
 @Entity
 public class Clientes implements Serializable {
@@ -19,6 +19,7 @@ public class Clientes implements Serializable {
     private String nome;
     private String cpf;
     private String telefone;
+    private String email;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Aparelhos_Clientes> aparelhos;
@@ -52,12 +53,19 @@ public class Clientes implements Serializable {
     public Clientes() {
     }
 
-    public Clientes(Integer id, String nome, String cpf, String telefone) {
+
+
+    public Clientes(Integer id, String nome, String cpf, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.email = email;
     }
+
+    public String getEmail() {return email;}
+
+    public void setEmail(String email) {this.email = email;}
 
     public Integer getId() {
         return id;
@@ -105,20 +113,16 @@ public class Clientes implements Serializable {
         this.aparelhos = aparelhos;
     }
 
-    public void inserirCliente(EntityManager em) {
+    public static void inserirCliente(EntityManager em, String nome, String email, String cpf, String telefone) {
 
-        System.out.println("Nome: ");
-        System.out.println("Cpf: ");
-        System.out.println("Telefone: ");
         Clientes clientes = new Clientes();
         clientes.setNome(nome);
         clientes.setCpf(cpf);
         clientes.setTelefone(telefone);
+        clientes.setEmail(email);
 
         em.getTransaction().begin();
-
         em.merge(clientes);
-
         em.getTransaction().commit();
 
     }

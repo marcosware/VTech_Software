@@ -30,20 +30,20 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField layoutX="125.0" layoutY="75.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="IDUsuario" layoutX="125.0" layoutY="75.0" prefHeight="25.0" prefWidth="104.0" />
       <Label layoutX="59.0" layoutY="131.0" text="Nome" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="125.0" layoutY="127.0" prefHeight="25.0" prefWidth="510.0" />
-      <TextField layoutX="125.0" layoutY="191.0" prefHeight="25.0" prefWidth="153.0" />
+      <TextField fx:id="NomeUsuario" layoutX="125.0" layoutY="127.0" prefHeight="25.0" prefWidth="510.0" />
+      <TextField fx:id="TelefoneUsuario" layoutX="125.0" layoutY="191.0" prefHeight="25.0" prefWidth="153.0" />
       <Label layoutX="52.0" layoutY="195.0" text="Telefone" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="350.0" layoutY="195.0" text="Login" textFill="WHITE">
+      <Label layoutX="350.0" layoutY="195.0" text="Email" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -53,15 +53,9 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="351.0" layoutY="275.0" text="Perfil" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField layoutX="125.0" layoutY="274.0" prefHeight="25.0" prefWidth="153.0" />
-      <TextField layoutX="397.0" layoutY="274.0" prefHeight="25.0" prefWidth="237.0" />
-      <Button layoutX="86.0" layoutY="424.0" mnemonicParsing="false" opacity="0.27" prefHeight="70.0" prefWidth="84.0" />
-      <TextField layoutX="397.0" layoutY="191.0" prefHeight="25.0" prefWidth="237.0" />
+      <TextField fx:id="SenhaUsuario" layoutX="125.0" layoutY="274.0" prefHeight="25.0" prefWidth="153.0" />
+      <Button fx:id="CadastrarUsuario" layoutX="86.0" layoutY="424.0" mnemonicParsing="false" onAction="#CadastrarUsuario" opacity="0.27" prefHeight="70.0" prefWidth="84.0" />
+      <TextField fx:id="EmailUsuario" layoutX="397.0" layoutY="191.0" prefHeight="25.0" prefWidth="237.0" />
       <Button layoutX="202.0" layoutY="424.0" mnemonicParsing="false" opacity="0.27" prefHeight="70.0" prefWidth="84.0" />
       <Button layoutX="313.0" layoutY="424.0" mnemonicParsing="false" opacity="0.27" prefHeight="70.0" prefWidth="84.0" />
       <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />

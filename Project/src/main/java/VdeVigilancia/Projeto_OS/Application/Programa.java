@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Programa {
 
-    public static final Scanner sc = new Scanner(System.in);
+    /*public static final Scanner sc = new Scanner(System.in);
     public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_V_Tech");
     public static final EntityManager em = emf.createEntityManager();
     public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class Programa {
         Querys querys = new Querys();
         Orcamento orcamento = new Orcamento();
 
-        /*querys.selectClientes();*/
+        querys.selectClientes();
         querys.createDB();
 
         System.out.println("----------------------------- MENU OPÇÕES -----------------------------");
@@ -64,6 +64,6 @@ public class Programa {
             emf.close();
             sc.close();
         }
-    }
+    } */
 }
 

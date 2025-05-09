@@ -1,55 +1,17 @@
 package VdeVigilancia.Projeto_OS;
-import VdeVigilancia.Projeto_OS.Dominio.Clientes;
-import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import javax.persistence.EntityManager;
-
-import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
-
 
 public class Controller {
     @FXML
-    Button BotaoCadastrarCliente, BotaoEntrar, CadastrarUsuario;
+    Button BotaoCadastro, BotaoEntrar;
 
     @FXML
     MenuItem BotaoCliente, BotaoUsuario, BotaoOS;
-
-    @FXML
-    protected void CadastrarCliente () {
-        String nome = NomeCliente.getText();
-        String email = EmailCliente.getText();
-        String cpf = CPFCliente.getText();
-        String telefone = TelefoneCliente.getText();
-        System.out.println(telefone.length());
-
-        Clientes.inserirCliente ( em , nome , email , cpf , telefone );
-
-
-    }
-    @FXML private TextField NomeCliente;
-    @FXML private TextField EmailCliente;
-    @FXML private TextField CPFCliente;
-    @FXML private TextField TelefoneCliente;
-
-    @FXML
-    protected void CadastrarUsuario () {
-        String nome = NomeUsuario.getText();
-        String email  = EmailUsuario.getText();
-        String telefone = TelefoneUsuario.getText();
-        String senha = SenhaUsuario.getText();
-         Usuarios.inserirUsuarios(em,  nome,  email, telefone, senha);
-
-    }
-    @FXML private TextField NomeUsuario;
-    @FXML private TextField SenhaUsuario;
-    @FXML private TextField TelefoneUsuario;
-    @FXML private TextField EmailUsuario;
-
 
     @FXML
     protected void abrirTelaCliente () {

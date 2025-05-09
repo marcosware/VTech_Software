@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
+import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.sc;
 
 @Entity
 public class Aparelhos_Clientes implements Serializable {

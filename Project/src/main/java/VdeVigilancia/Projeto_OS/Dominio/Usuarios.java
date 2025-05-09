@@ -3,7 +3,8 @@ package VdeVigilancia.Projeto_OS.Dominio;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
+
+import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.sc;
 
 @Entity
 
@@ -14,18 +15,34 @@ public class Usuarios implements Serializable {
     private Integer id;
     private String nome;
     private String email;
-    private String codigo_registro;
-    private String perfil;
+    private String telefone;
+    private String senha;
 
     public Usuarios() {
     }
 
-    public Usuarios(Integer id, String perfil, String codigo_registro, String email, String nome) {
+    public Usuarios(Integer id, String email, String nome, String telefone, String senha) {
         this.id = id;
-        this.perfil = perfil;
-        this.codigo_registro = codigo_registro;
+        this.telefone = telefone;
         this.email = email;
         this.nome = nome;
+        this.senha = senha;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public Integer getId() {
@@ -44,21 +61,6 @@ public class Usuarios implements Serializable {
         this.email = email;
     }
 
-    public String getCodigo_registro() {
-        return codigo_registro;
-    }
-
-    public void setCodigo_registro(String codigo_registro) {
-        this.codigo_registro = codigo_registro;
-    }
-
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
-    }
 
     public String getNome() {
         return nome;
@@ -68,26 +70,16 @@ public class Usuarios implements Serializable {
         this.nome = nome;
     }
 
-    public void inserirUsuarios (EntityManager em ){
-        System.out.println("Nome : ");
-        String nome = sc.nextLine();
-
-        System.out.println("Email: ");
-        String email = sc.nextLine();
-
-        System.out.println("Código ");
-        String codigo = sc.nextLine();
+    public static void inserirUsuarios (EntityManager em, String nome, String email, String telefone, String senha) {
 
         Usuarios users = new Usuarios();
 
         users.setNome(nome);
         users.setEmail(email);
-        users.setCodigo_registro(codigo);
-
+        users.setTelefone(telefone);
+        users.setSenha(senha);
         em.getTransaction().begin();
-
         em.merge(users);
-
         em.getTransaction().commit();
     }
 
@@ -97,8 +89,9 @@ public class Usuarios implements Serializable {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
-                ", codigo_registro='" + codigo_registro + '\'' +
-                ", perfil='" + perfil + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", senha='" + senha + '\'' +
                 '}';
     }
+
 }
