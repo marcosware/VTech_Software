@@ -1,5 +1,7 @@
 package VdeVigilancia.Projeto_OS.Dominio;
 
+import VdeVigilancia.Projeto_OS.Query_Banco.Querys;
+
 import javax.persistence.*;
 import javax.sound.midi.Soundbank;
 import java.io.Serializable;
@@ -110,9 +112,15 @@ public class  OS implements Serializable {
 
     public void criarOSAutomatica(EntityManager em, Clientes cliente, Aparelhos_Clientes aparelho, String descricao){
 
-        /*System.out.println("CPF: ");
-        String cpf = sc.nextLine();*/
+        Querys query = new Querys();
+        System.out.print("Insira o ID: \n");
+        query.selectWhereClientes();
 
+        System.out.print("Insira o ID do aparelho: \n");
+        query.selectWhereAparelhos();
+
+        System.out.print("Descrição da Ordem de Serviço: \n");
+        descricao = sc.nextLine();
 
         if (cliente == null || aparelho == null || descricao == null || descricao.trim().isEmpty()){
             System.out.println("Erro: Campos Obrigátorios estão vazios. Insira as informações solicitadas");
