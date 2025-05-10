@@ -220,7 +220,137 @@ public class Querys {
         }
         return selectOS();
     }
+
+    public void selectUsuarios() {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+
+            TypedQuery<Usuarios> queryUsuarios = em.createQuery("SELECT u FROM Usuarios u", Usuarios.class);
+            List<Usuarios> todosUsuarios = queryUsuarios.getResultList();
+
+            if (todosUsuarios.isEmpty()) {
+                System.out.println("Nenhum usuário encontrado");
+            } else {
+                for (Usuarios usuario : todosUsuarios) {
+                    System.out.println("ID: " + usuario.getId() + ", Nome: " + usuario.getNome());
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar usuários: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
+
+    public Usuarios selectWhereUsuarios() {
+        EntityManager em = null;
+        try {
+            System.out.print("Digite o ID do usuário: ");
+            String idStr = sc.nextLine();
+
+            if (idStr == null || idStr.trim().isEmpty()) {
+                System.out.println("ID não pode ser vazio.");
+                return null;
+            }
+
+            int id = Integer.parseInt(idStr.trim());
+
+            em = emf.createEntityManager();
+
+            Usuarios usuario = em.find(Usuarios.class, id);
+
+            if (usuario == null) {
+                System.out.println("Nenhum usuário encontrado com este ID: " + id);
+            } else {
+                System.out.println("ID: " + usuario.getId() + ", Nome: " + usuario.getNome());
+            }
+
+            return usuario;
+
+        } catch (NumberFormatException e) {
+            System.err.println("ID inválido. Por favor, digite apenas números.");
+            return null;
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar usuário por ID: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    public void selectOrcamentos() {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+
+            TypedQuery<Orcamento> queryOrcamentos = em.createQuery("SELECT o FROM Orcamento o", Orcamento.class);
+            List<Orcamento> todosOrcamentos = queryOrcamentos.getResultList();
+
+            if (todosOrcamentos.isEmpty()) {
+                System.out.println("Nenhum orçamento encontrado");
+            } else {
+                for (Orcamento orcamento : todosOrcamentos) {
+                    System.out.println("ID: " + orcamento.getId() + ", Valor: " + orcamento.getValor() + ", Data: " + orcamento.getData_Orcamento());
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar orçamentos: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    public Orcamento selectWhereOrcamentos() {
+        EntityManager em = null;
+        try {
+            System.out.print("Digite o ID do orçamento: ");
+            String idStr = sc.nextLine();
+
+            if (idStr == null || idStr.trim().isEmpty()) {
+                System.out.println("ID não pode ser vazio.");
+                return null;
+            }
+
+            int id = Integer.parseInt(idStr.trim());
+
+            em = emf.createEntityManager();
+
+            Orcamento orcamento = em.find(Orcamento.class, id);
+
+            if (orcamento == null) {
+                System.out.println("Nenhum orçamento encontrado com este ID: " + id);
+            } else {
+                System.out.println("ID: " + orcamento.getId() + ", Valor: " + orcamento.getValor() + ", Data: " + orcamento.getData_Orcamento());
+            }
+
+            return orcamento;
+
+        } catch (NumberFormatException e) {
+            System.err.println("ID inválido. Por favor, digite apenas números.");
+            return null;
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar orçamento por ID: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+
+}
 
 
 

@@ -14,6 +14,8 @@ module VdeVigilancia.Projeto_OS {
     requires spring.data.relational;
     requires java.persistence;
     requires org.hibernate.orm.core;
+    requires kernel;
+    requires layout;
     exports VdeVigilancia.Projeto_OS;
     opens VdeVigilancia.Projeto_OS to javafx.fxml;
     opens VdeVigilancia.Projeto_OS.Dominio to org.hibernate.orm.core;
