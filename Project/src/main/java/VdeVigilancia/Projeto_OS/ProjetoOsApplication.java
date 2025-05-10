@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 @SpringBootApplication
-public class 	ProjetoOsApplication extends Application {
+public class ProjetoOsApplication extends Application {
 	public static final Scanner sc = new Scanner(System.in);
 	public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_V_Tech");
 	public static final EntityManager em = emf.createEntityManager();

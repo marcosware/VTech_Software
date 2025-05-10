@@ -41,12 +41,8 @@ public class Querys {
 
     }
 
-    public void selectClientes() {
-        EntityManager em = null;
-
+    public static List<Clientes> selectClientes(EntityManager em) {
         try {
-            em = emf.createEntityManager();  // abre o EntityManager
-
             TypedQuery<Clientes> queryClientes = em.createQuery("SELECT c FROM Clientes c", Clientes.class);
             List<Clientes> todosClientes = queryClientes.getResultList();
 
@@ -57,15 +53,14 @@ public class Querys {
                     System.out.println("ID: " + cliente.getId() + " , nome: " + cliente.getNome());
                 }
             }
+            return todosClientes;  // Retorna a lista para o Controller
         } catch (Exception e) {
             System.err.println("Erro ao buscar clientes: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();  // fecha o EntityManager corretamente
-            }
+            return null;
         }
     }
+
 
 
     public void selectWhereClientes() {

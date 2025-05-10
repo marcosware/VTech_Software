@@ -15,7 +15,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml" fx:controller="VdeVigilancia.Projeto_OS.Controller">
    <children>
       <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="59.0">
          <image>
@@ -23,27 +25,24 @@
          </image>
       </ImageView>
       <Label layoutX="58.0" layoutY="287.0" text="Nome" textFill="#fffafa" />
-      <Label layoutX="51.0" layoutY="398.0" prefHeight="17.0" prefWidth="51.0" text=" Telefone" textFill="#fffafa" />
-      <Label layoutX="64.0" layoutY="358.0" text="CPF" textFill="#fffafa" />
-      <Label layoutX="60.0" layoutY="323.0" text="Email" textFill="#fffafa" />
-      <TextField fx:id="email" layoutX="114.0" layoutY="319.0" prefHeight="25.0" prefWidth="430.0" promptText="Email" />
-      <TextField fx:id="Nome" layoutX="114.0" layoutY="283.0" prefHeight="25.0" prefWidth="430.0" promptText="Nome" />
-      <TextField fx:id="CPF" layoutX="114.0" layoutY="354.0" prefHeight="25.0" prefWidth="430.0" promptText="CPF" />
-      <TextField fx:id="Telefone" layoutX="114.0" layoutY="394.0" prefHeight="25.0" prefWidth="430.0" promptText="Telefone" />
+      <Label layoutX="51.0" layoutY="385.0" prefHeight="17.0" prefWidth="51.0" text=" Telefone" textFill="#fffafa" />
+      <Label layoutX="66.0" layoutY="336.0" text="CPF" textFill="#fffafa" />
+      <TextField fx:id="NomeCliente" layoutX="114.0" layoutY="283.0" prefHeight="25.0" prefWidth="430.0" promptText="Nome" />
+      <TextField fx:id="CpfCliente" layoutX="114.0" layoutY="332.0" prefHeight="25.0" prefWidth="430.0" promptText="CPF" />
+      <TextField fx:id="TelefoneCliente" layoutX="114.0" layoutY="384.0" prefHeight="25.0" prefWidth="430.0" promptText="Telefone" />
       <ImageView fitHeight="242.0" fitWidth="243.0" layoutX="649.0" layoutY="72.0">
          <image>
             <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
-      <TreeTableView layoutX="56.0" layoutY="123.0" prefHeight="149.0" prefWidth="549.0">
-        <columns>
-          <TreeTableColumn prefWidth="88.0" text="id" />
-          <TreeTableColumn prefWidth="88.0" text="Nome" />
-            <TreeTableColumn prefWidth="88.0" text="CPF" />
-            <TreeTableColumn prefWidth="88.0" text="Email" />
-            <TreeTableColumn prefWidth="88.0" text="Telefone" />
-        </columns>
-      </TreeTableView>
+      <TableView fx:id="tabelaClientes" layoutX="10" layoutY="10" prefWidth="580" prefHeight="380">
+         <columns>
+            <TableColumn fx:id="colID" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="150"/>
+            <TableColumn fx:id="colCpf" text="CPF" prefWidth="150"/>
+            <TableColumn fx:id="colTelefone" text="Telefone" prefWidth="150"/>
+         </columns>
+      </TableView>
       <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
       <MenuBar layoutX="39.0" layoutY="25.0">
          <menus>
@@ -87,16 +86,22 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="BotaoCadastrar" layoutX="114.0" layoutY="478.0" mnemonicParsing="false" onAction="#cadastrarCliente" text="Cadastrar" />
-      <Button fx:id="BotaoEditar" layoutX="308.0" layoutY="478.0" mnemonicParsing="false" onAction="#editarCliente" prefHeight="25.0" prefWidth="73.0" text="Editar" />
-      <Button fx:id="BotaoExcluir" layoutX="471.0" layoutY="478.0" mnemonicParsing="false" onAction="#excluirCliente" prefHeight="25.0" prefWidth="73.0" text="Excluir" />
-      <TextField fx:id="Aparelho" layoutX="115.0" layoutY="433.0" prefHeight="25.0" prefWidth="430.0" promptText="Aparelho" />
-      <Label layoutX="51.0" layoutY="437.0" prefHeight="17.0" prefWidth="51.0" text="Aparelho" textFill="#fffafa" />
+      <Button fx:id="BotaoCadastrar" layoutX="114.0" layoutY="478.0" mnemonicParsing="false" onAction="#CadastrarCliente" text="Cadastrar" />
+      <Button fx:id="BotaoEditar" layoutX="308.0" layoutY="478.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="25.0" prefWidth="73.0" text="Editar" />
+      <Button fx:id="BotaoExcluir" layoutX="471.0" layoutY="478.0" mnemonicParsing="false" onAction="#removerClientes" prefHeight="25.0" prefWidth="73.0" text="Excluir" />
       <TextField fx:id="Filtrar" layoutX="54.0" layoutY="90.0" prefHeight="25.0" prefWidth="549.0" promptText="Filtrar" />
-      <Button fx:id="botaoFiltrar" layoutX="552.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
-      <ImageView fitHeight="17.0" fitWidth="25.0" layoutX="569.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="botaoFiltrar" layoutX="545.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" onAction="#filtrarClientes">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+               <image>
+                  <Image url="@Imagens/png-transparent-computer-icons-magnifier-magnifying-glass-source-black-magnifier-zooming-user-interface.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" layoutX="554.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Imagens/64e14fe0195557e3f18ea3becba3169b-lupa-de-pesquisa.png" />
+            <Image url="@Imagens/png-transparent-computer-icons-magnifier-magnifying-glass-source-black-magnifier-zooming-user-interface.png" />
          </image>
       </ImageView>
    </children>

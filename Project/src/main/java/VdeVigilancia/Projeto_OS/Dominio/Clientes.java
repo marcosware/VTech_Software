@@ -101,7 +101,7 @@ public class Clientes implements Serializable {
     }
 
     public void setTelefone(String telefone) throws IllegalArgumentException {
-        if (telefone == null || telefone.matches("\\d{11}")) {
+        if (telefone == null || !telefone.matches("\\d{11}")) {
             throw new IllegalArgumentException("Telefone inválido");
         }
         this.telefone = telefone;
@@ -122,30 +122,26 @@ public class Clientes implements Serializable {
         clientes.setNome(nome);
         System.out.println("CPF: ");
         clientes.setCpf(cpf);
-        /*System.out.println("Telefone: ");
-        clientes.setTelefone(telefone);*/
+        System.out.println("Telefone: ");
+        clientes.setTelefone(telefone);
 
         em.getTransaction().begin();
-        em.merge(clientes);
+        em.persist(clientes);
         em.getTransaction().commit();
 
     }
 
-    public void editarClientes (){
+    public static boolean editarClientes (EntityManager em, Integer id, String nome, String cpf, String Telefone){
         System.out.print("Digite o ID do cliente que deseja alterar: \n");
-        int id;
-
         try {
             id = Integer.parseInt(sc.nextLine());
         }catch (NumberFormatException e){
             System.out.println("ID inválido");
-            return;
         }
 
         Clientes cliente = em.find(Clientes.class, id);
         if (cliente == null){
             System.out.println("Cliente com id " + id + " não encontrado.");
-            return;
         }
 
         System.out.println("Cliente atual: " + cliente.getNome());
@@ -158,11 +154,11 @@ public class Clientes implements Serializable {
             cliente.setNome(newName);
         }
 
-        System.out.println("Novo email (deixe em branco para não alterar): ");
+        /*System.out.println("Novo email (deixe em branco para não alterar): ");
         String newEmail = sc.nextLine();
         if(!newEmail.trim().isEmpty()){
             cliente.setEmail(newEmail);
-        }
+        }*/
 
         System.out.println("Novo telefone (deixe em branco para não alterar): ");
         String newTelefone = sc.nextLine();
@@ -182,9 +178,10 @@ public class Clientes implements Serializable {
             System.out.println("Erro ao atualizar cliente: " + e.getMessage());
             e.printStackTrace();
         }
+        return editarClientes(em, id, nome, cpf,Telefone);
     }
 
-    public void removerCliente(){
+    public static void removerCliente(Integer id){
         System.out.print("Digite o ID do cliente que deseja excluir: \n");
         try {
             id = Integer.parseInt(sc.nextLine());
@@ -221,6 +218,7 @@ public class Clientes implements Serializable {
             e.printStackTrace();
         }
     }
+
 
     public void addAparelhos(Aparelhos_Clientes aparelho) {
         if(this.aparelhos == null){
