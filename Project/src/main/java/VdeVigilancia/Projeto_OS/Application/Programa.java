@@ -24,7 +24,6 @@ public class Programa {
         Orcamento orcamento = new Orcamento();
 
         /*querys.selectClientes();*/
-        querys.createDB();
 
         System.out.println("----------------------------- MENU OPÇÕES -----------------------------");
         System.out.println("1 - Inserir Clientes");
@@ -41,16 +40,16 @@ public class Programa {
 
                 if (opção.equals("1")) {
                     try {
-                        services.inserirCliente(em);
+                        services.inserirCliente(em, sc.nextLine(), sc.nextLine(), sc.nextLine());
                     } catch (IllegalArgumentException e) {
                         System.out.println(e);
                     }
                 } else if (opção.equals("2")) {
-                    users.inserirUsuarios(em);
+                    users.inserirUsuarios(em, sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine());
                 }else if (opção.equals("3")) {
                     aparelhos.cadastrarAparelhos(em);
                 }else if (opção.equals("4")) {
-                    os.criarOSAutomatica(em, new Clientes(), new Aparelhos_Clientes(), "");
+                    os.criarOSAutomatica(em);
                 }else if(opção.equals("5")){
                     orcamento.criarOrcamento();
                 } else if (opção.equals("0")) {

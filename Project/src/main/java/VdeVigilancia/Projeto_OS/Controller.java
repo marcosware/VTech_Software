@@ -13,6 +13,7 @@ import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
 
 
 public class Controller {
+
     @FXML
     Button BotaoCadastrarCliente, BotaoEntrar, CadastrarUsuario;
 
@@ -27,7 +28,7 @@ public class Controller {
         String telefone = TelefoneCliente.getText();
         System.out.println(telefone.length());
 
-        Clientes.inserirCliente ( em , nome , email , cpf , telefone );
+        Clientes.inserirCliente ( em , nome , cpf , telefone );
 
 
     }
@@ -42,13 +43,15 @@ public class Controller {
         String email  = EmailUsuario.getText();
         String telefone = TelefoneUsuario.getText();
         String senha = SenhaUsuario.getText();
-         Usuarios.inserirUsuarios(em,  nome,  email, telefone, senha);
+        String codigoRegisto = Codigo.getText();
+         Usuarios.inserirUsuarios(em,  nome,  email, telefone, senha, codigoRegisto);
 
     }
     @FXML private TextField NomeUsuario;
     @FXML private TextField SenhaUsuario;
     @FXML private TextField TelefoneUsuario;
     @FXML private TextField EmailUsuario;
+    @FXML private TextField Codigo;
 
 
     @FXML

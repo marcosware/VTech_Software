@@ -160,5 +160,99 @@ public class Aparelhos_Clientes implements Serializable {
             }finally {
         }
     }
+    public void editarAparelho(EntityManager em) {
+        System.out.println("--- Editar Aparelho ---");
+        System.out.print("Digite o ID do aparelho a ser editado: ");
+
+        int aparelhoID;
+        try {
+            aparelhoID = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido.");
+            return;
+        }
+
+        Aparelhos_Clientes aparelho = em.find(Aparelhos_Clientes.class, aparelhoID);
+        if (aparelho == null) {
+            System.out.println("Aparelho com ID " + aparelhoID + " não encontrado.");
+            return;
+        }
+
+        System.out.println("Aparelho encontrado: Marca: " + aparelho.getMarca() + ", Modelo: " + aparelho.getModelo() + ", Nº Série: " + aparelho.getNumero_serie());
+
+        System.out.print("Digite a nova Marca (ou ENTER para manter '" + aparelho.getMarca() + "'): ");
+        String novaMarca = sc.nextLine();
+        if (!novaMarca.trim().isEmpty()) {
+            aparelho.setMarca(novaMarca);
+        }
+
+        System.out.print("Digite o novo Modelo (ou ENTER para manter '" + aparelho.getModelo() + "'): ");
+        String novoModelo = sc.nextLine();
+        if (!novoModelo.trim().isEmpty()) {
+            aparelho.setModelo(novoModelo);
+        }
+
+        System.out.print("Digite o novo Número de Série (ou ENTER para manter '" + aparelho.getNumero_serie() + "'): ");
+        String novoNumeroSerie = sc.nextLine();
+        if (!novoNumeroSerie.trim().isEmpty()) {
+            aparelho.setNumero_serie(novoNumeroSerie);
+        }
+
+        try {
+            em.getTransaction().begin();
+            em.merge(aparelho);
+            em.getTransaction().commit();
+
+            System.out.println("Aparelho atualizado com sucesso!");
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Erro ao atualizar aparelho: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void removerAparelho(EntityManager em) {
+        System.out.println("--- Remover Aparelho ---");
+        System.out.print("Digite o ID do aparelho a ser removido: ");
+
+        int aparelhoID;
+        try {
+            aparelhoID = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido.");
+            return;
+        }
+
+        Aparelhos_Clientes aparelho = em.find(Aparelhos_Clientes.class, aparelhoID);
+        if (aparelho == null) {
+            System.out.println("Aparelho com ID " + aparelhoID + " não encontrado.");
+            return;
+        }
+
+        try {
+            em.getTransaction().begin();
+
+            // Remover aparelho da lista do cliente, se existir
+            Clientes cliente = aparelho.getCliente();
+            if (cliente != null) {
+                cliente.getAparelhos().remove(aparelho);
+            }
+
+            em.remove(aparelho);
+            em.getTransaction().commit();
+
+            System.out.println("Aparelho removido com sucesso!");
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Erro ao remover aparelho: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 }
 

@@ -2,12 +2,14 @@ package VdeVigilancia.Projeto_OS.Dominio;
 
 import VdeVigilancia.Projeto_OS.Dominio.OS;
 import VdeVigilancia.Projeto_OS.Dominio.Aparelhos_Clientes;
+import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
 import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.sc;
 
 @Entity
@@ -113,18 +115,111 @@ public class Clientes implements Serializable {
         this.aparelhos = aparelhos;
     }
 
-    public static void inserirCliente(EntityManager em, String nome, String email, String cpf, String telefone) {
+    public static void inserirCliente(EntityManager em, String nome/*String email*/, String cpf, String telefone) {
 
         Clientes clientes = new Clientes();
+        System.out.println("Nome: ");
         clientes.setNome(nome);
+        System.out.println("CPF: ");
         clientes.setCpf(cpf);
-        clientes.setTelefone(telefone);
-        clientes.setEmail(email);
+        /*System.out.println("Telefone: ");
+        clientes.setTelefone(telefone);*/
 
         em.getTransaction().begin();
         em.merge(clientes);
         em.getTransaction().commit();
 
+    }
+
+    public void editarClientes (){
+        System.out.print("Digite o ID do cliente que deseja alterar: \n");
+        int id;
+
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        }catch (NumberFormatException e){
+            System.out.println("ID inválido");
+            return;
+        }
+
+        Clientes cliente = em.find(Clientes.class, id);
+        if (cliente == null){
+            System.out.println("Cliente com id " + id + " não encontrado.");
+            return;
+        }
+
+        System.out.println("Cliente atual: " + cliente.getNome());
+
+        System.out.println("Novo nome (deixe em branco para não alterar.");
+
+        String newName = sc.nextLine();
+
+        if(!newName.trim().isEmpty()){
+            cliente.setNome(newName);
+        }
+
+        System.out.println("Novo email (deixe em branco para não alterar): ");
+        String newEmail = sc.nextLine();
+        if(!newEmail.trim().isEmpty()){
+            cliente.setEmail(newEmail);
+        }
+
+        System.out.println("Novo telefone (deixe em branco para não alterar): ");
+        String newTelefone = sc.nextLine();
+        if(!newTelefone.trim().isEmpty()){
+            cliente.setTelefone(newTelefone);
+        }
+
+        try {
+            em.getTransaction().begin();
+            em.merge(cliente);
+            em.getTransaction().commit();
+            System.out.println("Cliente atualizado com sucesso!");
+        }catch (Exception e){
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            System.out.println("Erro ao atualizar cliente: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void removerCliente(){
+        System.out.print("Digite o ID do cliente que deseja excluir: \n");
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        }catch (NumberFormatException e){
+            System.out.println("ID inválido");
+            return;
+        }
+
+        Clientes cliente = em.find(Clientes.class, id);
+        if (cliente == null){
+            System.out.println("Cliente com ID " + id + " não encontrado.");
+            return;
+        }
+
+        System.out.println("Cliente encontrado: " + cliente.getNome());
+        System.out.println("Deseja realmente excluir? (s/n): ");
+        String confirmcao = sc.nextLine();
+
+        if(!confirmcao.equalsIgnoreCase("s")){
+            System.out.println("Exclusão cancelada");
+            return;
+        }
+
+        try {
+            em.getTransaction().begin();
+            em.remove(cliente);
+            em.getTransaction().commit();
+            System.out.println("Cliente excluído com sucesso! ");
+        }catch (Exception e){
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            System.out.println("Erro ao excluir cliente: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void addAparelhos(Aparelhos_Clientes aparelho) {
@@ -134,6 +229,7 @@ public class Clientes implements Serializable {
         this.aparelhos.add(aparelho);
         aparelho.setCliente(this);
     }
+
 
     @Override
     public String toString() {

@@ -122,5 +122,7 @@
             <Image url="@Imagens/Excluir.png" />
          </image>
       </ImageView>
+      <TextField fx:id="codigo" layoutX="396.0" layoutY="273.0" prefHeight="26.0" prefWidth="238.0" />
+      <Label fx:id="codigo_registro" layoutX="307.0" layoutY="277.0" text="Código Registro" textFill="WHITE" />
    </children>
 </AnchorPane>

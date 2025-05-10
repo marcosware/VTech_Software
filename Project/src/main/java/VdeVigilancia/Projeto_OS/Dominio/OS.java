@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Random;
 
+import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
 import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
 
 @Entity
@@ -110,52 +111,61 @@ public class  OS implements Serializable {
     }
 
 
-    public void criarOSAutomatica(EntityManager em, Clientes cliente, Aparelhos_Clientes aparelho, String descricao){
-
-        Querys query = new Querys();
-        System.out.print("Insira o ID: \n");
-        query.selectWhereClientes();
-
-        System.out.print("Insira o ID do aparelho: \n");
-        query.selectWhereAparelhos();
-
-        System.out.print("Descrição da Ordem de Serviço: \n");
-        descricao = sc.nextLine();
-
-        if (cliente == null || aparelho == null || descricao == null || descricao.trim().isEmpty()){
-            System.out.println("Erro: Campos Obrigátorios estão vazios. Insira as informações solicitadas");
-            return;
-        }
-
-
-        Random status = new Random();
-        StatusOS[] statusOS = StatusOS.values();
-
-        int randomEnum = status.nextInt(statusOS.length);
-
+    public void criarOSAutomatica(EntityManager em) {
         try {
+            Querys query = new Querys();
+
+            System.out.print("Insira o ID do cliente: ");
+            int idCliente = Integer.parseInt(sc.nextLine());
+            Clientes cliente = em.find(Clientes.class, idCliente);
+
+            if (cliente == null) {
+                System.out.println("Cliente não encontrado.");
+                return;
+            }
+
+            Aparelhos_Clientes aparelho = query.selectWhereAparelhos(em);
+            if (aparelho == null) {
+                System.out.println("Aparelho não encontrado.");
+                return;
+            }
+
+            System.out.print("Descrição da Ordem de Serviço: ");
+            String descricao = sc.nextLine();
+
+            if (descricao == null || descricao.trim().isEmpty()) {
+                System.out.println("Descrição não pode ser vazia.");
+                return;
+            }
+
+            StatusOS[] statusOS = StatusOS.values();
+            StatusOS status = statusOS[new Random().nextInt(statusOS.length)];
+
             em.getTransaction().begin();
 
             OS novaOS = new OS();
-
             novaOS.setAbertura(LocalDate.now());
-            novaOS.setStatus(statusOS[randomEnum]);
+            novaOS.setStatus(status);
             novaOS.setDescricao(descricao);
-
             novaOS.setCliente(cliente);
             novaOS.setAparelho(aparelho);
 
-            em.merge(novaOS);
+            em.persist(novaOS);  // use persist em vez de merge para novo registro
 
             em.getTransaction().commit();
             System.out.println("OS criada com sucesso! ID: " + novaOS.getId());
-        }catch (Exception e){
-            if (em != null && em.getTransaction().isActive()){
+
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido. Use apenas números.");
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            System.out.println("Erro ao criar OS !!");
+            System.out.println("Erro ao criar OS: " + e.getMessage());
+            e.printStackTrace();
         }
     }
+
     @Override
     public String toString() {
         return "OS{" +

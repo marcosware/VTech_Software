@@ -11,7 +11,8 @@ public class Querys {
 
     EntityManager em = null;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_V_Tech");
-    public void createDB (){
+
+    public void createDB() {
         try {
             em = emf.createEntityManager();
 
@@ -26,14 +27,14 @@ public class Querys {
 
             System.out.println("Executado com Sucesso");
 
-        } catch (Exception e){
-            if (em!= null && em.getTransaction().isActive()){
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             System.out.println("Erro ao executar a query: " + e.getMessage());
             e.printStackTrace();
-    }finally {
-            if(em != null);
+        } finally {
+            if (em != null) ;
             em.close();
         }
 
@@ -109,9 +110,7 @@ public class Querys {
         }
     }
 
-    public void selectAparelhos(){
-        EntityManager em = null;
-
+    public void selectAparelhos() {
         try {
             em = emf.createEntityManager();  // abre o EntityManager
 
@@ -135,47 +134,96 @@ public class Querys {
         }
     }
 
-    public void selectWhereAparelhos(){
-        EntityManager em = null;
-
+    public Aparelhos_Clientes selectWhereAparelhos(EntityManager em) {
         try {
             System.out.print("Digite o ID do aparelho: ");
             String idAparelho = sc.nextLine();
 
             if (idAparelho == null || idAparelho.trim().isEmpty()) {
                 System.out.println("ID não pode ser vazio.");
-                return;
+                return null;
             }
 
-            int id = Integer.parseInt(idAparelho.trim()); // agora seguro para converter
+            int id = Integer.parseInt(idAparelho.trim());
 
-            em = emf.createEntityManager();
+            Aparelhos_Clientes aparelho = em.find(Aparelhos_Clientes.class, id);
 
-            TypedQuery<Aparelhos_Clientes> aparelhosClientesTypedQueryID = em.createQuery(
-                    "SELECT c FROM Aparelhos_Clientes c WHERE c.id = :id", Aparelhos_Clientes.class
-            );
-            aparelhosClientesTypedQueryID.setParameter("id", id);
-
-            List<Aparelhos_Clientes> aparelhosComEsseID = aparelhosClientesTypedQueryID.getResultList();
-
-            if (aparelhosComEsseID.isEmpty()) {
-                System.out.println("Nenhum cliente encontrado com este ID: " + id);
+            if (aparelho == null) {
+                System.out.println("Nenhum aparelho encontrado com este ID: " + id);
             } else {
-                for (Aparelhos_Clientes aparelhos : aparelhosComEsseID) {
-                    System.out.println("ID: " + aparelhos.getId());
-                }
+                System.out.println("ID encontrado: " + aparelho.getId());
             }
+
+            return aparelho;
+
         } catch (NumberFormatException e) {
             System.err.println("ID inválido. Por favor, digite apenas números.");
+            return null;
         } catch (Exception e) {
             System.err.println("Erro ao buscar aparelho por ID: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            return null;
         }
     }
 
-}
+    public OS selectOS() {
+        try {
+            em = emf.createEntityManager();  // abre o EntityManager
+
+            TypedQuery<OS> queryOS = em.createQuery("SELECT c FROM OS c", OS.class);
+            List<OS> ordemServico = queryOS.getResultList();
+
+            if (ordemServico.isEmpty()) {
+                System.out.println("Nenhum cliente encontrado");
+            } else {
+                for (OS ordem : ordemServico) {
+                    System.out.println("ID: " + ordem.getId());
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar clientes: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();  // fecha o EntityManager corretamente
+            }
+        }
+        return selectOS();
+    }
+    public OS selectWhereOS() {
+        try {
+            System.out.print("Digite o ID do aparelho: ");
+            String idOS = sc.nextLine();
+
+            if (idOS == null || idOS.trim().isEmpty()) {
+                System.out.println("ID não pode ser vazio.");
+                return null;
+            }
+
+            int id = Integer.parseInt(idOS.trim());
+
+            OS ordem = em.find(OS.class, id);
+
+            if (ordem == null) {
+                System.out.println("Nenhum aparelho encontrado com este ID: " + id);
+            } else {
+                System.out.println("ID encontrado: " + ordem.getId());
+            }
+
+        } catch (NumberFormatException e) {
+            System.err.println("ID inválido. Por favor, digite apenas números.");
+            return null;
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar aparelho por ID: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return selectOS();
+    }
+    }
+
+
+
+
+
 

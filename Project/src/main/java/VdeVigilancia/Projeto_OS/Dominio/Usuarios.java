@@ -17,6 +17,15 @@ public class Usuarios implements Serializable {
     private String email;
     private String telefone;
     private String senha;
+    private String codigo_usuario;
+
+    public String getCodigo_usuario() {
+        return codigo_usuario;
+    }
+
+    public void setCodigo_usuario(String codigo_usuario) {
+        this.codigo_usuario = codigo_usuario;
+    }
 
     public Usuarios() {
     }
@@ -70,7 +79,7 @@ public class Usuarios implements Serializable {
         this.nome = nome;
     }
 
-    public static void inserirUsuarios (EntityManager em, String nome, String email, String telefone, String senha) {
+    public static void inserirUsuarios (EntityManager em, String nome, String email, String telefone, String senha, String codigo_usuario) {
 
         Usuarios users = new Usuarios();
 
@@ -78,6 +87,7 @@ public class Usuarios implements Serializable {
         users.setEmail(email);
         users.setTelefone(telefone);
         users.setSenha(senha);
+        users.setCodigo_usuario(codigo_usuario);
         em.getTransaction().begin();
         em.merge(users);
         em.getTransaction().commit();
