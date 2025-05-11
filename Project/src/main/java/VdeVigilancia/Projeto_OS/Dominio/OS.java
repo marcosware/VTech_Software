@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
-import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
 
 @Entity
 

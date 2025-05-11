@@ -1,9 +1,11 @@
 package VdeVigilancia.Projeto_OS;
+import VdeVigilancia.Projeto_OS.Application.Programa;
 import VdeVigilancia.Projeto_OS.Dominio.Clientes;
 import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
 import VdeVigilancia.Projeto_OS.Query_Banco.Querys;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import java.util.List;
-import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
+
+import static VdeVigilancia.Projeto_OS.Application.Programa.em;
 
 
 
@@ -118,17 +121,6 @@ public class Controller {
     @FXML
     private TextField filtrarField;
 
-
-    public void atualizarTabela() {
-        List<Clientes> clientes = Querys.selectClientes(ProjetoOsApplication.em);
-        if (clientes != null) {
-            tabelaClientes.setItems(FXCollections.observableArrayList(clientes));
-        } else {
-            tabelaClientes.setItems(FXCollections.observableArrayList());
-        }
-    }
-
-
     @FXML
     public void initialize() {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -139,21 +131,37 @@ public class Controller {
         atualizarTabela();
     }
 
+    public void atualizarTabela() {
+        List<Clientes> clientes = Querys.selectClientes(Programa.em);
 
-    @FXML
-    protected void filtrarClientes() {
-        String filtro = filtrarField.getText();
-        if (filtro == null || filtro.trim().isEmpty()) {
-            // Se filtro vazio, carrega todos
-            atualizarTabela();
+        if (clientes == null) {
+            tabelaClientes.setItems(FXCollections.observableArrayList());
             return;
         }
 
-        List<Clientes> clientesFiltrados = Clientes.filtrarClientes(ProjetoOsApplication.em, filtro.trim());
-        if (clientesFiltrados != null) {
-            tabelaClientes.setItems(FXCollections.observableArrayList(clientesFiltrados));
-        }
+        // Convertemos a lista normal para uma ObservableList
+        FilteredList<Clientes> dadosFiltrados = new FilteredList<>(FXCollections.observableArrayList(clientes), p -> true);
+
+        // Adiciona listener no campo de filtro
+        filtrarField.textProperty().addListener((observable, oldValue, newValue) -> {
+            dadosFiltrados.setPredicate(cliente -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String textoFiltro = newValue.toLowerCase();
+                return cliente.getNome().toLowerCase().contains(textoFiltro);
+            });
+        });
+
+        // Para ordenar corretamente junto com a tabela
+        SortedList<Clientes> dadosOrdenados = new SortedList<>(dadosFiltrados);
+        dadosOrdenados.comparatorProperty().bind(tabelaClientes.comparatorProperty());
+
+        // Exibe os dados filtrados e ordenados
+        tabelaClientes.setItems(dadosOrdenados);
     }
+
 
     @FXML
     protected void abrirTelaCliente () {
@@ -196,4 +204,6 @@ public class Controller {
                 e.printStackTrace();
             }
     }
+
+
 }

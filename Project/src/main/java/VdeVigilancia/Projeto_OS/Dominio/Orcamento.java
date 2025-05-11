@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
-import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.sc;
+import static VdeVigilancia.Projeto_OS.Application.Programa.em;
+import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
 
 @Entity
 

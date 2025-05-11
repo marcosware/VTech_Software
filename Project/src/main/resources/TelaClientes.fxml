@@ -5,9 +5,9 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,9 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml" fx:controller="VdeVigilancia.Projeto_OS.Controller">
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
    <children>
       <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="59.0">
          <image>
@@ -35,12 +33,12 @@
             <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tabelaClientes" layoutX="10" layoutY="10" prefWidth="580" prefHeight="380">
+      <TableView fx:id="tabelaClientes" layoutX="77.0" layoutY="118.0" prefHeight="149.0" prefWidth="510.0">
          <columns>
-            <TableColumn fx:id="colID" text="ID" prefWidth="50"/>
-            <TableColumn fx:id="colNome" text="Nome" prefWidth="150"/>
-            <TableColumn fx:id="colCpf" text="CPF" prefWidth="150"/>
-            <TableColumn fx:id="colTelefone" text="Telefone" prefWidth="150"/>
+            <TableColumn fx:id="colId" prefWidth="50" text="ID" />
+            <TableColumn fx:id="colNome" prefWidth="150" text="Nome" />
+            <TableColumn fx:id="colCpf" prefWidth="150" text="CPF" />
+            <TableColumn fx:id="colTelefone" prefWidth="150" text="Telefone" />
          </columns>
       </TableView>
       <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
@@ -87,19 +85,11 @@
          </font>
       </Label>
       <Button fx:id="BotaoCadastrar" layoutX="114.0" layoutY="478.0" mnemonicParsing="false" onAction="#CadastrarCliente" text="Cadastrar" />
-      <Button fx:id="BotaoEditar" layoutX="308.0" layoutY="478.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="25.0" prefWidth="73.0" text="Editar" />
+      <Button fx:id="BotaoEditar" layoutX="296.0" layoutY="478.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="25.0" prefWidth="73.0" text="Editar" />
       <Button fx:id="BotaoExcluir" layoutX="471.0" layoutY="478.0" mnemonicParsing="false" onAction="#removerClientes" prefHeight="25.0" prefWidth="73.0" text="Excluir" />
-      <TextField fx:id="Filtrar" layoutX="54.0" layoutY="90.0" prefHeight="25.0" prefWidth="549.0" promptText="Filtrar" />
-      <Button fx:id="botaoFiltrar" layoutX="545.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" onAction="#filtrarClientes">
-         <graphic>
-            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-               <image>
-                  <Image url="@Imagens/png-transparent-computer-icons-magnifier-magnifying-glass-source-black-magnifier-zooming-user-interface.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" layoutX="554.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="Filtrar" layoutX="78.0" layoutY="77.0" prefHeight="26.0" prefWidth="510.0" promptText="Filtrar" />
+      <Button fx:id="botaoFiltrar" layoutX="535.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+      <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" layoutX="544.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagens/png-transparent-computer-icons-magnifier-magnifying-glass-source-black-magnifier-zooming-user-interface.png" />
          </image>

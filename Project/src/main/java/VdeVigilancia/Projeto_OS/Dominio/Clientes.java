@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.em;
-import static VdeVigilancia.Projeto_OS.ProjetoOsApplication.sc;
+import static VdeVigilancia.Projeto_OS.Application.Programa.em;
+import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
 
 @Entity
 public class Clientes implements Serializable {
@@ -218,8 +218,7 @@ public class Clientes implements Serializable {
             e.printStackTrace();
         }
     }
-
-
+    
     public void addAparelhos(Aparelhos_Clientes aparelho) {
         if(this.aparelhos == null){
             this.aparelhos = new ArrayList<>();

@@ -61,8 +61,6 @@ public class Querys {
         }
     }
 
-
-
     public void selectWhereClientes() {
         EntityManager em = null;
 
@@ -343,6 +341,193 @@ public class Querys {
             }
         }
     }
+
+    public void dropTableClientes() {
+        executeDropTable("Clientes");
+    }
+
+    public void dropTableAparelhosClientes() {
+        executeDropTable("Aparelhos_Clientes");
+    }
+
+    public void dropTableOS() {
+        executeDropTable("OS");
+    }
+
+    public void dropTableUsuarios() {
+        executeDropTable("Usuarios");
+    }
+
+    public void dropTableOrcamento() {
+        executeDropTable("Orcamento");
+    }
+
+    // Método auxiliar para executar o DROP TABLE
+    private void executeDropTable(String tableName) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            String sql = "DROP TABLE IF EXISTS " + tableName;
+            em.createNativeQuery(sql).executeUpdate();
+
+            em.getTransaction().commit();
+            System.out.println("Tabela " + tableName + " dropada com sucesso.");
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao dropar tabela " + tableName + ": " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    public void deleteClienteById(int id) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            Clientes cliente = em.find(Clientes.class, id);
+            if (cliente != null) {
+                em.remove(cliente);
+                System.out.println("Cliente com ID " + id + " removido com sucesso.");
+            } else {
+                System.out.println("Cliente com ID " + id + " não encontrado.");
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao remover cliente: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    public void deleteAparelhoById(int id) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            Aparelhos_Clientes aparelho = em.find(Aparelhos_Clientes.class, id);
+            if (aparelho != null) {
+                em.remove(aparelho);
+                System.out.println("Aparelho com ID " + id + " removido com sucesso.");
+            } else {
+                System.out.println("Aparelho com ID " + id + " não encontrado.");
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao remover aparelho: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    public void deleteOSById(int id) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            OS ordem = em.find(OS.class, id);
+            if (ordem != null) {
+                em.remove(ordem);
+                System.out.println("Ordem de Serviço com ID " + id + " removida com sucesso.");
+            } else {
+                System.out.println("Ordem de Serviço com ID " + id + " não encontrada.");
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao remover Ordem de Serviço: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    public void deleteUsuarioById(int id) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            Usuarios usuario = em.find(Usuarios.class, id);
+            if (usuario != null) {
+                em.remove(usuario);
+                System.out.println("Usuário com ID " + id + " removido com sucesso.");
+            } else {
+                System.out.println("Usuário com ID " + id + " não encontrado.");
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao remover usuário: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    public void deleteOrcamentoById(int id) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            Orcamento orcamento = em.find(Orcamento.class, id);
+            if (orcamento != null) {
+                em.remove(orcamento);
+                System.out.println("Orçamento com ID " + id + " removido com sucesso.");
+            } else {
+                System.out.println("Orçamento com ID " + id + " não encontrado.");
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao remover orçamento: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+
 
 
 }

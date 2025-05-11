@@ -6,7 +6,6 @@ import VdeVigilancia.Projeto_OS.Query_Banco.Querys;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.security.SecureRandom;
 import java.util.Scanner;
 
 public class Programa {
