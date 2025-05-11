@@ -21,7 +21,7 @@ public class ProjetoOSApplication extends Application{
 			return;
 		} */
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaPrincipial.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaPrincipal.fxml"));
 		AnchorPane root = loader.load();
 
 		Scene scene = new Scene(root);
