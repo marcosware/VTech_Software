@@ -32,7 +32,6 @@ public class Controller {
         String cpf = CpfCliente.getText();
         String telefone = TelefoneCliente.getText();
         System.out.println(telefone.length());
-
         Clientes.inserirCliente ( em , nome , cpf , telefone );
 
     }
@@ -121,7 +120,7 @@ public class Controller {
     @FXML
     private TextField filtrarField;
 
-    @FXML
+    /* @FXML
     public void initialize() {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -129,7 +128,7 @@ public class Controller {
         colTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
         atualizarTabela();
-    }
+    } */
 
     public void atualizarTabela() {
         List<Clientes> clientes = Querys.selectClientes(Programa.em);
@@ -162,6 +161,15 @@ public class Controller {
         tabelaClientes.setItems(dadosOrdenados);
     }
 
+    @FXML
+    protected void atualizarTabelaClientes() {
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        colTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+
+        atualizarTabela();
+    }
 
     @FXML
     protected void abrirTelaCliente () {
