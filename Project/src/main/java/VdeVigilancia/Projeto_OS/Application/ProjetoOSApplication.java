@@ -13,15 +13,15 @@ public class ProjetoOSApplication extends Application{
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		String fxmlPath = "TelaPrincipal.fxml"; // sem a barra inicial
+		/* String fxmlPath = "TelaPrincipal.fxml"; // sem a barra inicial
 		URL resource = getClass().getClassLoader().getResource(fxmlPath);
 		if (resource == null) {
 			System.err.println("Arquivo FXML não encontrado no caminho: " + fxmlPath);
 			return;
-		}
+		} */
 
-		FXMLLoader fxmlLoader = new FXMLLoader(resource);
-		Parent root = fxmlLoader.load();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaPrincipial.fxml"));
+		AnchorPane root = loader.load();
 
 		Scene scene = new Scene(root);
 		stage.setTitle("V de Vigilância");
