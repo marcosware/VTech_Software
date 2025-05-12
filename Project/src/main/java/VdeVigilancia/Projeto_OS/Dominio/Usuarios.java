@@ -16,15 +16,6 @@ public class Usuarios implements Serializable {
     private String email;
     private String telefone;
     private String senha;
-    private String codigo_usuario;
-
-    public String getCodigo_usuario() {
-        return codigo_usuario;
-    }
-
-    public void setCodigo_usuario(String codigo_usuario) {
-        this.codigo_usuario = codigo_usuario;
-    }
 
     public Usuarios() {
     }
@@ -86,7 +77,6 @@ public class Usuarios implements Serializable {
         users.setEmail(email);
         users.setTelefone(telefone);
         users.setSenha(senha);
-        users.setCodigo_usuario(codigo_usuario);
         em.getTransaction().begin();
         em.merge(users);
         em.getTransaction().commit();
@@ -137,9 +127,6 @@ public class Usuarios implements Serializable {
         }
         if (newSenha != null && !newSenha.trim().isEmpty()){
             user.setSenha(newSenha);
-        }
-        if(newCodigo != null && !newCodigo.trim().isEmpty()){
-            user.setCodigo_usuario(newCodigo);
         }
         if (newTelefone != null && !newTelefone.trim().isEmpty()){
             user.setTelefone(newTelefone);

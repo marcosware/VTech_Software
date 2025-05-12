@@ -29,38 +29,6 @@ public class Controller {
     MenuItem BotaoCliente, BotaoUsuario, BotaoOS;
 
     @FXML
-    private TextField NomeUsuario, SenhaUsuario, TelefoneUsuario, EmailUsuario, Codigo;
-
-
-    @FXML
-    protected void CadastrarUsuario() {
-        String nome = NomeUsuario.getText();
-        String email = EmailUsuario.getText();
-        String telefone = TelefoneUsuario.getText();
-        String senha = SenhaUsuario.getText();
-        String codigoRegisto = Codigo.getText();
-    }
-
-    @FXML
-    protected void editarUsuario() {
-        String nome = NomeUsuario.getText(),
-                email = EmailUsuario.getText(),
-                telefone = TelefoneUsuario.getText(),
-                senha = SenhaUsuario.getText(),
-                codigo = Codigo.getText();
-
-    }
-
-
-    private void limparCampos() {
-        NomeUsuario.clear();
-        EmailUsuario.clear();
-        TelefoneUsuario.clear();
-        SenhaUsuario.clear();
-        Codigo.clear();
-    }
-
-    @FXML
     protected void abrirTelaCliente() {
         changeScreen(BotaoCliente, "/TelaClientes.fxml");
     }
