@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.ControllerCliente">
    <children>
       <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="59.0">
          <image>
@@ -33,7 +33,7 @@
             <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tabelaClientes" layoutX="77.0" layoutY="118.0" prefHeight="149.0" prefWidth="510.0">
+      <TableView fx:id="tabelaCliente" layoutX="77.0" layoutY="118.0" onMouseClicked="#selecionarCliente" prefHeight="149.0" prefWidth="510.0">
          <columns>
             <TableColumn fx:id="colunaID" prefWidth="50" text="ID" />
             <TableColumn fx:id="colunaNome" prefWidth="150" text="Nome" />
