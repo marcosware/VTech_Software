@@ -1,5 +1,6 @@
 package VdeVigilancia.Projeto_OS.Application;
 
+import VdeVigilancia.Projeto_OS.Dominio.Clientes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,19 +10,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+
+import static VdeVigilancia.Projeto_OS.Application.Programa.em;
 
 public class ProjetoOSApplication extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		String fxmlPath = "TelaPrincipal.fxml"; // sem a barra inicial
-		URL resource = getClass().getClassLoader().getResource(fxmlPath);
-		if (resource == null) {
-			System.err.println("Arquivo FXML não encontrado no caminho: " + fxmlPath);
-			return;
-		}
-
+		List<Clientes> resultados = em.createQuery("FROM Clientes", Clientes.class).getResultList();
+		System.out.println("Qtd clientes: " + resultados.size()); // Deve exibir > 0
+		resultados.forEach(c -> System.out.println(c.getNome()));
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaPrincipal.fxml"));
+
 		AnchorPane root = loader.load();
 
 		Scene scene = new Scene(root);

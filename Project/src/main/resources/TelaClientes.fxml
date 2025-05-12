@@ -84,15 +84,15 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="BotaoCadastrar" layoutX="114.0" layoutY="478.0" mnemonicParsing="false" onAction="#CadastrarCliente" text="Cadastrar" />
+      <Button fx:id="BotaoCadastrar" layoutX="114.0" layoutY="478.0" mnemonicParsing="false" onAction="#criarCliente" text="Cadastrar" />
       <Button fx:id="BotaoEditar" layoutX="296.0" layoutY="478.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="25.0" prefWidth="73.0" text="Editar" />
       <Button fx:id="BotaoExcluir" layoutX="471.0" layoutY="478.0" mnemonicParsing="false" onAction="#removerClientes" prefHeight="25.0" prefWidth="73.0" text="Excluir" />
-      <TextField fx:id="Filtrar" layoutX="78.0" layoutY="77.0" prefHeight="26.0" prefWidth="510.0" promptText="Filtrar" />
-      <Button fx:id="botaoFiltrar" layoutX="535.0" layoutY="77.0" mnemonicParsing="false" onAction="#filtrarClientes" prefHeight="25.0" prefWidth="51.0" text="Filtrar" />
-      <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" layoutX="544.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="botaoFiltrar" layoutX="533.0" layoutY="77.0" mnemonicParsing="false" onAction="#onBuscarClick" prefHeight="25.0" prefWidth="51.0" />
+      <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" layoutX="542.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagens/png-transparent-computer-icons-magnifier-magnifying-glass-source-black-magnifier-zooming-user-interface.png" />
          </image>
       </ImageView>
+      <TextField fx:id="campoBusca" layoutX="77.0" layoutY="77.0" prefHeight="26.0" prefWidth="454.0" promptText="Buscar cliente por ID" />
    </children>
 </AnchorPane>

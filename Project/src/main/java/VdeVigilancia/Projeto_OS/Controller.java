@@ -1,26 +1,27 @@
 package VdeVigilancia.Projeto_OS;
 
 import VdeVigilancia.Projeto_OS.Dominio.Clientes;
+import VdeVigilancia.Projeto_OS.Dominio.JPAUtil;
 import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
-import com.mysql.cj.xdevapi.Client;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import org.bouncycastle.crypto.agreement.jpake.JPAKEUtil;
 
-import javax.persistence.TypedQuery;
+import javax.persistence.EntityManager;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-import static VdeVigilancia.Projeto_OS.Application.Programa.em;
+public class Controller implements Initializable{
 
-public class Controller{
-
-    private int idClienteSelecionado = -1;
-
+    public Button botaoFiltrar;
     @FXML
     Button BotaoCadastrarCliente, BotaoEntrar, CadastrarUsuario;
 
@@ -33,162 +34,60 @@ public class Controller{
     private TextField NomeUsuario, SenhaUsuario, TelefoneUsuario, EmailUsuario, Codigo;
 
     @FXML
-    private TableView<Clientes> tabelaClientes;
+    private TextField campoBusca;
 
     @FXML
-    private TableColumn<Clientes, Integer> colID;
+    public TableView<Clientes> tabelaClientes;
 
     @FXML
-    private TableColumn<Clientes, String> colNome;
+    public TableColumn<Clientes, Integer> colunaID;
 
     @FXML
-    private TableColumn<Clientes, String> colCpf;
+    public TableColumn<Clientes, String> colunaNome;
 
     @FXML
-    private TableColumn<Clientes, String> colTelefone;
+    public TableColumn<Clientes, String> colunaCpf;
 
     @FXML
-    private TextField filtrarField;
+    public TableColumn<Clientes, String> colunaTelefone;
 
-    @FXML
-    private TextField Pesquisar;
-
-
-    @FXML
-    public void initialize(){
-        if(tabelaClientes != null){
-            ObservableList<Clientes> clientes = FXCollections.observableArrayList(
-                    new Clientes(1, "Caio", "15193439659", "971494707")
-            );
-            tabelaClientes.setItems(clientes);
-        }else {
-            System.out.println("tabelaClientes não foi inicializada!");
-        }
-        atualizaTabelasClientes();
-    }
-
-    @FXML
-    protected void CadastrarCliente() {
-        String nome = NomeCliente.getText();
-        String cpf = CpfCliente.getText();
-        String telefone = TelefoneCliente.getText();
-        System.out.println(telefone.length());
-        Clientes.menuClientes();
-
-        if(nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty()){
-            System.out.println("Por favor, preencha todos os campos.");
-            return;
-        }
-        Clientes.menuClientes();
-    }
-
-    @FXML
-    public void editarClientes() {
-       if(idClienteSelecionado == -1){
-           System.out.println("Nenhum cliente selecionado para editar.");
-           return;
-       }
-
-       try{
-           em.getTransaction().begin();
-
-           Clientes clientes = em.find(Clientes.class, idClienteSelecionado);
-
-           if(clientes != null){
-               clientes.setNome(NomeCliente.getText());
-               clientes.setCpf(CpfCliente.getText());
-               clientes.setTelefone(TelefoneCliente.getText());
-
-               em.merge(clientes);
-           }
-           em.getTransaction().commit();
-
-           atualizaTabelasClientes();
-           limparCampos();
-       }catch (Exception e){
-           if(em.getTransaction().isActive()){
-               em.getTransaction().rollback();
-           }
-           e.printStackTrace();
-       }
-
-    }
-
-
-    public void atualizaTabelasClientes(){
-        try {
-            List<Clientes> list = em.createQuery("select c from Clientes c", Clientes.class).getResultList();
-            ObservableList<Clientes> dados = FXCollections.observableArrayList(list);
-            tabelaClientes.setItems(dados);
-
-            colID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-            colNome.setCellValueFactory(new PropertyValueFactory<>("Nome"));
-            colCpf.setCellValueFactory(new PropertyValueFactory<>("CPF"));
-            colTelefone.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
-        }catch (Exception e){
-            if(em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void removerClientes() {
-        if(idClienteSelecionado == -1){
-            System.out.println("Nenhum cliente selecionado para a remoção.");
-            return;
-        }
-
-        try {
-            em.getTransaction().begin();
-
-            Clientes cliente = em.find(Clientes.class, idClienteSelecionado);
-            if(cliente != null){
-                em.remove(cliente);
-            }
-
-            em.getTransaction().commit();
-
-            atualizaTabelasClientes();
-            limparCampos();
-        }catch (Exception e){
-            if(em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void selecionarCliente(){
-        Clientes cliente = tabelaClientes.getSelectionModel().getSelectedItem();
-        if(cliente != null){
-            idClienteSelecionado = cliente.getId();
-            NomeCliente.setText(cliente.getNome());
-            CpfCliente.setText(cliente.getCpf());
-            TelefoneCliente.setText(cliente.getTelefone());
-        }
-    }
-
-    @FXML
-    protected void carregarCliente (String filtro){
-        TypedQuery <Clientes> query = em.createQuery("Select c from Clientes c where lower (c.nome) like :filtro", Clientes.class);
-        query.setParameter("filtro" , "%" + filtro.toLowerCase() + "%");
-
-        List <Clientes> lista = query.getResultList();
-        ObservableList <Clientes> dados = FXCollections.observableArrayList(lista);
-        tabelaClientes.setItems(dados);
-    }
     @FXML
     private TextField Filtrar;
 
-    @FXML
-    private void filtrarClientes(){
-        String textoFiltro = Filtrar.getText();
-        carregarCliente(textoFiltro);
+    public void initialize (URL location, ResourceBundle resource) {
+        // Verificar se a tabela e as colunas foram corretamente injetadas
+        if (tabelaClientes != null && colunaID != null && colunaNome != null && colunaCpf != null && colunaTelefone != null) {
+            System.out.println("Tabela e Colunas Iniciadas corretamente.");
+
+            // Definir as colunas
+            colunaID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+            colunaCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+            colunaTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+
+            // Atualizar a tabela com dados
+            atualizarTabela();
+        } else {
+            System.out.println("Falha na injeção de colunas ou tabela.");
+        }
     }
 
+
+    public void limparCamposClientes(){
+        NomeCliente.clear();
+        CpfCliente.clear();
+        TelefoneCliente.clear();
+    }
+
+    public void atualizarTabela(){
+        EntityManager em = JPAUtil.getEntityManager();
+        try{
+        List<Clientes> clientes = em.createQuery("SELECT C FROM Clientes C" , Clientes.class).getResultList();
+        tabelaClientes.setItems(FXCollections.observableArrayList(clientes));
+    }finally {
+            em.close();
+        }
+        }
 
     @FXML
     protected void CadastrarUsuario() {
@@ -197,7 +96,6 @@ public class Controller{
         String telefone = TelefoneUsuario.getText();
         String senha = SenhaUsuario.getText();
         String codigoRegisto = Codigo.getText();
-        Usuarios.inserirUsuarios(em, nome, email, telefone, senha, codigoRegisto);
     }
 
     @FXML
@@ -261,5 +159,82 @@ public class Controller{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void criarCliente(javafx.event.ActionEvent actionEvent) {
+
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try{
+        Clientes clientes = new Clientes();
+        clientes.setNome(NomeCliente.getText());
+        clientes.setCpf(CpfCliente.getText());
+        clientes.setTelefone(TelefoneCliente.getText());
+
+        em.getTransaction().begin();
+        em.persist(clientes);
+        em.getTransaction().commit();
+
+    }finally {
+            em.close();
+        }
+        atualizarTabela();
+        limparCamposClientes();
+        }
+
+    public void editarClientes(javafx.event.ActionEvent actionEvent) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try{
+        Clientes clientes = tabelaClientes.getSelectionModel().getSelectedItem();
+        if(clientes != null){
+            clientes.setNome(NomeCliente.getText());
+            clientes.setCpf(CpfCliente.getText());
+            clientes.setTelefone(TelefoneCliente.getText());
+
+            em.getTransaction().begin();
+            em.merge(clientes);
+            em.getTransaction().commit();
+
+
+        }
+    }finally {
+            em.close();
+        }
+        atualizarTabela();
+        limparCamposClientes();
+        }
+
+    public void removerClientes(javafx.event.ActionEvent actionEvent) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try{
+        Clientes clientes = tabelaClientes.getSelectionModel().getSelectedItem();
+        if(clientes != null){
+            em.getTransaction().begin();
+            clientes = em.find(Clientes.class, clientes.getId());
+            em.remove(clientes);
+            em.getTransaction().commit();
+
+        }
+    }finally {
+            em.close();
+        }
+        atualizarTabela();
+        limparCamposClientes();
+        }
+
+    public void filtrarClientes(javafx.event.ActionEvent actionEvent) {
+        String textoBuscar = campoBusca.getText();
+
+        EntityManager em = JPAUtil.getEntityManager();
+        String filtro =botaoFiltrar.getText();
+        List<Clientes> resultados = em.createQuery("SELECT C FROM Clientes C WHERE C. nome LIKE :filtro", Clientes.class).setParameter ("filtro", "%" + filtro + "%").getResultList();
+
+        em.close();
+
+        tabelaClientes.setItems(FXCollections.observableArrayList(resultados));
+    }
+
+    public void onBuscarClick(ActionEvent actionEvent) {
+        atualizarTabela();
     }
 }
