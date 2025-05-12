@@ -19,6 +19,7 @@ module VdeVigilancia.Projeto_OS {
     requires layout;
     requires mysql.connector.j;
     requires org.bouncycastle.provider;
+    requires jakarta.persistence;
     exports VdeVigilancia.Projeto_OS.Application;
     opens VdeVigilancia.Projeto_OS to javafx.fxml;
     opens VdeVigilancia.Projeto_OS.Dominio to org.hibernate.orm.core;

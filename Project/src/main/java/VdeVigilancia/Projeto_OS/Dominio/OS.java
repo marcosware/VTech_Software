@@ -22,6 +22,16 @@ public class  OS implements Serializable {
     private LocalDate abertura;
 
     private LocalDate fechamento;
+    
+    private String Servicos;
+
+    public String getServicos() {
+        return Servicos;
+    }
+
+    public void setServicos(String servicos) {
+        Servicos = servicos;
+    }
 
     @Column (columnDefinition = "Text" , nullable = false)
     private String descricao;
@@ -65,7 +75,7 @@ public class  OS implements Serializable {
         return aparelho;
     }
 
-    public void setAparelho(Aparelhos_Clientes aparelho) {
+    public void setAparelho() {
         this.aparelho = aparelho;
     }
 
@@ -123,7 +133,7 @@ public class  OS implements Serializable {
                 return;
             }
 
-            Aparelhos_Clientes aparelho = query.selectWhereAparelhos(em);
+            Aparelhos_Clientes aparelho = query.selectWhereAparelhos();
             if (aparelho == null) {
                 System.out.println("Aparelho não encontrado.");
                 return;
@@ -147,7 +157,7 @@ public class  OS implements Serializable {
             novaOS.setStatus(status);
             novaOS.setDescricao(descricao);
             novaOS.setCliente(cliente);
-            novaOS.setAparelho(aparelho);
+            novaOS.setAparelho();
 
             em.persist(novaOS);  // use persist em vez de merge para novo registro
 
@@ -178,4 +188,9 @@ public class  OS implements Serializable {
                 '}';
     }
 
+    public void setServico(String text) {
+    }
+
+    public void setValorTotal(double v) {
+    }
 }

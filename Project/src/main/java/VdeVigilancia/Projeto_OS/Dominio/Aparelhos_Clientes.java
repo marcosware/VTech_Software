@@ -7,6 +7,8 @@ import java.util.List;
 
 import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
 
+
+
 @Entity
 public class Aparelhos_Clientes implements Serializable {
 
@@ -42,14 +44,7 @@ public class Aparelhos_Clientes implements Serializable {
             this.ordemServico = new ArrayList<>();
         }
         this.ordemServico.add(os);
-        os.setAparelho(this);
-    }
-
-    public void removeOS (OS os){
-        if (this.ordemServico != null){
-            this.ordemServico.remove(os);
-            os.setAparelho(null);
-        }
+       // os.setAparelho(this);
     }
 
     public Integer getId() {

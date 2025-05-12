@@ -127,7 +127,7 @@ public class Querys {
         }
     }
 
-    public Aparelhos_Clientes selectWhereAparelhos(EntityManager em) {
+    public Aparelhos_Clientes selectWhereAparelhos() {
         try {
             System.out.print("Digite o ID do aparelho: ");
             String idAparelho = sc.nextLine();

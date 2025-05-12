@@ -71,4 +71,11 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    public void idCliente(ActionEvent actionEvent) {
+
+    }
+
+    public void adicionarItem(ActionEvent actionEvent) {
+    }
 }
