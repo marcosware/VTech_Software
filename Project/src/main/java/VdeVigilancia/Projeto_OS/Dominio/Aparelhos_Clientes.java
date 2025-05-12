@@ -144,9 +144,9 @@ public class Aparelhos_Clientes implements Serializable {
 
             em.getTransaction().begin();
 
-            for (Aparelhos_Clientes aparelho : novosAparelhos){
+            /*for (Aparelhos_Clientes aparelho : novosAparelhos){
                 cliente.addAparelhos(aparelho);
-            }
+            }*/
 
             em.getTransaction().commit();
             System.out.println(novosAparelhos.size() + " aparelho(s) adicionado(s) ao cliente " + cliente.getNome() + "com sucesso");

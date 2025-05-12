@@ -35,10 +35,10 @@
       </ImageView>
       <TableView fx:id="tabelaClientes" layoutX="77.0" layoutY="118.0" prefHeight="149.0" prefWidth="510.0">
          <columns>
-            <TableColumn fx:id="colID" prefWidth="50" text="ID" />
-            <TableColumn fx:id="colNome" prefWidth="150" text="Nome" />
-            <TableColumn fx:id="colCpf" prefWidth="150" text="CPF" />
-            <TableColumn fx:id="colTelefone" prefWidth="150" text="Telefone" />
+            <TableColumn fx:id="colunaID" prefWidth="50" text="ID" />
+            <TableColumn fx:id="colunaNome" prefWidth="150" text="Nome" />
+            <TableColumn fx:id="colunaCpf" prefWidth="150" text="CPF" />
+            <TableColumn fx:id="colunaTelefone" prefWidth="150" text="Telefone" />
          </columns>
       </TableView>
       <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
@@ -88,16 +88,11 @@
       <Button fx:id="BotaoEditar" layoutX="296.0" layoutY="478.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="25.0" prefWidth="73.0" text="Editar" />
       <Button fx:id="BotaoExcluir" layoutX="471.0" layoutY="478.0" mnemonicParsing="false" onAction="#removerClientes" prefHeight="25.0" prefWidth="73.0" text="Excluir" />
       <TextField fx:id="Filtrar" layoutX="78.0" layoutY="77.0" prefHeight="26.0" prefWidth="510.0" promptText="Filtrar" />
-      <Button fx:id="botaoFiltrar" layoutX="535.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+      <Button fx:id="botaoFiltrar" layoutX="535.0" layoutY="77.0" mnemonicParsing="false" onAction="#filtrarClientes" prefHeight="25.0" prefWidth="51.0" text="Filtrar" />
       <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" layoutX="544.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imagens/png-transparent-computer-icons-magnifier-magnifying-glass-source-black-magnifier-zooming-user-interface.png" />
          </image>
       </ImageView>
-      <Button fx:id="BotaoATC" layoutX="597.0" layoutY="77.0" mnemonicParsing="false" onAction="#atualizarTabelaClientes" prefHeight="26.0" prefWidth="58.0" text="Atualizar">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

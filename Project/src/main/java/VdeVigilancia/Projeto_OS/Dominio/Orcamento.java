@@ -1,6 +1,7 @@
 package VdeVigilancia.Projeto_OS.Dominio;
 
 import javax.persistence.*;
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -287,6 +288,15 @@ public class Orcamento implements Serializable {
             System.out.println("Erro ao salvar orçamento: " + e.getMessage());
             e.printStackTrace();
         }
+
+        File arquivo = new File("comprovante_orcamento_" + id + ".txt");
+
+        if (arquivo.exists()) {
+            System.out.println("Comprovante criado com sucesso: " + arquivo.getAbsolutePath());
+        } else {
+            System.out.println("Falha ao criar o comprovante.");
+        }
+
         return null;
     }
 

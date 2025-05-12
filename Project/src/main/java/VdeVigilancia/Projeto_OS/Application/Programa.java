@@ -25,7 +25,7 @@ public class Programa {
         /*querys.selectClientes();*/
 
         System.out.println("----------------------------- MENU OPÇÕES -----------------------------");
-        System.out.println("1 - Inserir Clientes");
+        System.out.println("1 - Clientes");
         System.out.println("2 - Inserir Usuário");
         System.out.println("3 - Cadastrar Aparelhos");
         System.out.println("4 - Criar OS");
@@ -39,7 +39,7 @@ public class Programa {
 
                 if (opção.equals("1")) {
                     try {
-                        services.inserirCliente(em, sc.nextLine(), sc.nextLine(), sc.nextLine());
+                        Clientes.menuClientes();
                     } catch (IllegalArgumentException e) {
                         System.out.println(e);
                     }

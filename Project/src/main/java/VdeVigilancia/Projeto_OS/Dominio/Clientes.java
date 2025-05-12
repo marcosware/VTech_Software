@@ -1,7 +1,5 @@
 package VdeVigilancia.Projeto_OS.Dominio;
 
-import VdeVigilancia.Projeto_OS.Dominio.OS;
-import VdeVigilancia.Projeto_OS.Dominio.Aparelhos_Clientes;
 import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.*;
@@ -21,73 +19,32 @@ public class Clientes implements Serializable {
     private String nome;
     private String cpf;
     private String telefone;
-    private String email;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Aparelhos_Clientes> aparelhos;
 
-    @OneToMany (mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List <OS> ordemServico = new ArrayList<>();
-
-    public List<OS> getOrdemServico(){
-        return  ordemServico;
-    }
-
-    public void setOrdemServico(List<OS> ordemServico) {
-        this.ordemServico = ordemServico;
-    }
-
-    public void addOS (OS os){
-        if (this.ordemServico == null){
-            this.ordemServico = new ArrayList<>();
-        }
-        this.ordemServico.add(os);
-        os.setCliente(this);
-    }
-
-    public void removeOS (OS os) {
-        if (this.ordemServico != null){
-            this.ordemServico.remove(os);
-            os.setCliente(null);
-        }
-    }
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OS> ordemServico = new ArrayList<>();
 
     public Clientes() {
     }
 
-
-
-    public Clientes(Integer id, String nome, String cpf, String telefone, String email) {
+    public Clientes(Integer id, String nome, String cpf, String telefone) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.email = email;
     }
 
-    public String getEmail() {return email;}
+    public Integer getId() { return id; }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setId(Integer id) { this.id = id; }
 
-    public Integer getId() {
-        return id;
-    }
+    public String getNome() { return nome; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
+    public String getCpf() { return cpf; }
 
     public void setCpf(String cpf) throws IllegalArgumentException {
         if (cpf == null || !cpf.matches("\\d{11}")) {
@@ -96,9 +53,7 @@ public class Clientes implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
+    public String getTelefone() { return telefone; }
 
     public void setTelefone(String telefone) throws IllegalArgumentException {
         if (telefone == null || !telefone.matches("\\d{11}")) {
@@ -107,126 +62,32 @@ public class Clientes implements Serializable {
         this.telefone = telefone;
     }
 
-    public List<Aparelhos_Clientes> getAparelhos() {
-        return aparelhos;
-    }
+    public List<Aparelhos_Clientes> getAparelhos() { return aparelhos; }
 
     public void setAparelhos(List<Aparelhos_Clientes> aparelhos) {
         this.aparelhos = aparelhos;
     }
 
-    public static void inserirCliente(EntityManager em, String nome/*String email*/, String cpf, String telefone) {
+    public List<OS> getOrdemServico() { return ordemServico; }
 
-        Clientes clientes = new Clientes();
-        System.out.println("Nome: ");
-        clientes.setNome(nome);
-        System.out.println("CPF: ");
-        clientes.setCpf(cpf);
-        System.out.println("Telefone: ");
-        clientes.setTelefone(telefone);
-
-        em.getTransaction().begin();
-        em.persist(clientes);
-        em.getTransaction().commit();
-
+    public void setOrdemServico(List<OS> ordemServico) {
+        this.ordemServico = ordemServico;
     }
 
-    public static boolean editarClientes (EntityManager em, Integer id, String nome, String cpf, String Telefone){
-        System.out.print("Digite o ID do cliente que deseja alterar: \n");
-        try {
-            id = Integer.parseInt(sc.nextLine());
-        }catch (NumberFormatException e){
-            System.out.println("ID inválido");
+    public void addOS(OS os) {
+        if (this.ordemServico == null) {
+            this.ordemServico = new ArrayList<>();
         }
-
-        Clientes cliente = em.find(Clientes.class, id);
-        if (cliente == null){
-            System.out.println("Cliente com id " + id + " não encontrado.");
-        }
-
-        System.out.println("Cliente atual: " + cliente.getNome());
-
-        System.out.println("Novo nome (deixe em branco para não alterar.");
-
-        String newName = sc.nextLine();
-
-        if(!newName.trim().isEmpty()){
-            cliente.setNome(newName);
-        }
-
-        /*System.out.println("Novo email (deixe em branco para não alterar): ");
-        String newEmail = sc.nextLine();
-        if(!newEmail.trim().isEmpty()){
-            cliente.setEmail(newEmail);
-        }*/
-
-        System.out.println("Novo telefone (deixe em branco para não alterar): ");
-        String newTelefone = sc.nextLine();
-        if(!newTelefone.trim().isEmpty()){
-            cliente.setTelefone(newTelefone);
-        }
-
-        try {
-            em.getTransaction().begin();
-            em.merge(cliente);
-            em.getTransaction().commit();
-            System.out.println("Cliente atualizado com sucesso!");
-        }catch (Exception e){
-            if(em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            System.out.println("Erro ao atualizar cliente: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return editarClientes(em, id, nome, cpf,Telefone);
+        this.ordemServico.add(os);
+        os.setCliente(this);
     }
 
-    public static void removerCliente(Integer id){
-        System.out.print("Digite o ID do cliente que deseja excluir: \n");
-        try {
-            id = Integer.parseInt(sc.nextLine());
-        }catch (NumberFormatException e){
-            System.out.println("ID inválido");
-            return;
-        }
-
-        Clientes cliente = em.find(Clientes.class, id);
-        if (cliente == null){
-            System.out.println("Cliente com ID " + id + " não encontrado.");
-            return;
-        }
-
-        System.out.println("Cliente encontrado: " + cliente.getNome());
-        System.out.println("Deseja realmente excluir? (s/n): ");
-        String confirmcao = sc.nextLine();
-
-        if(!confirmcao.equalsIgnoreCase("s")){
-            System.out.println("Exclusão cancelada");
-            return;
-        }
-
-        try {
-            em.getTransaction().begin();
-            em.remove(cliente);
-            em.getTransaction().commit();
-            System.out.println("Cliente excluído com sucesso! ");
-        }catch (Exception e){
-            if(em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            System.out.println("Erro ao excluir cliente: " + e.getMessage());
-            e.printStackTrace();
+    public void removeOS(OS os) {
+        if (this.ordemServico != null) {
+            this.ordemServico.remove(os);
+            os.setCliente(null);
         }
     }
-    
-    public void addAparelhos(Aparelhos_Clientes aparelho) {
-        if(this.aparelhos == null){
-            this.aparelhos = new ArrayList<>();
-        }
-        this.aparelhos.add(aparelho);
-        aparelho.setCliente(this);
-    }
-
 
     @Override
     public String toString() {
@@ -238,4 +99,137 @@ public class Clientes implements Serializable {
                 '}';
     }
 
+    // --- MENU DE CLIENTES ---
+    public static void menuClientes() {
+        int opcao = -1;
+
+        while (opcao != 0) {
+            System.out.println("\n--- MENU CLIENTES ---");
+            System.out.println("1 - Listar todos");
+            System.out.println("2 - Buscar por ID");
+            System.out.println("3 - Editar cliente");
+            System.out.println("4 - Remover cliente");
+            System.out.println("5 - Adicionar cliente");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha uma opção: ");
+
+            try {
+                opcao = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida.");
+                continue;
+            }
+
+            switch (opcao) {
+                case 1:
+                    listarTodos();
+                    break;
+                case 2:
+                    buscarPorId();
+                    break;
+                case 3:
+                    editarCliente();
+                    break;
+                case 4:
+                    removerCliente();
+                    break;
+                case 5:
+                    adicionarCliente();
+                    break;
+                case 0:
+                    System.out.println("Voltando...");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        }
+    }
+
+    private static void listarTodos() {
+        List<Clientes> clientes = em.createQuery("SELECT c FROM Clientes c", Clientes.class).getResultList();
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente encontrado.");
+        } else {
+            for (Clientes c : clientes) {
+                System.out.println("ID: " + c.getId() + " | Nome: " + c.getNome());
+            }
+        }
+    }
+
+    private static void buscarPorId() {
+        System.out.print("Digite o ID do cliente: ");
+        int id = Integer.parseInt(sc.nextLine());
+        Clientes cliente = em.find(Clientes.class, id);
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado.");
+        } else {
+            System.out.println("Cliente: " + cliente);
+        }
+    }
+
+    private static void editarCliente() {
+        System.out.print("Digite o ID do cliente a editar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        Clientes cliente = em.find(Clientes.class, id);
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return;
+        }
+
+        System.out.print("Novo nome: ");
+        String novoNome = sc.nextLine();
+
+        em.getTransaction().begin();
+        cliente.setNome(novoNome);
+        em.merge(cliente);
+        em.getTransaction().commit();
+
+        System.out.println("Cliente atualizado.");
+    }
+
+    private static void removerCliente() {
+        System.out.print("Digite o ID do cliente a remover: ");
+        int id = Integer.parseInt(sc.nextLine());
+        Clientes cliente = em.find(Clientes.class, id);
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return;
+        }
+
+        em.getTransaction().begin();
+        em.remove(cliente);
+        em.getTransaction().commit();
+
+        System.out.println("Cliente removido com sucesso.");
+    }
+
+    private static void adicionarCliente() {
+        try {
+            System.out.print("Nome: ");
+            String nome = sc.nextLine();
+
+            System.out.print("CPF (somente números, 11 dígitos): ");
+            String cpf = sc.nextLine();
+
+            System.out.print("Telefone (somente números, 11 dígitos): ");
+            String telefone = sc.nextLine();
+
+            System.out.print("Email: ");
+            String email = sc.nextLine();
+
+            Clientes cliente = new Clientes();
+            cliente.setNome(nome);
+            cliente.setCpf(cpf);
+            cliente.setTelefone(telefone);
+
+            em.getTransaction().begin();
+            em.persist(cliente);
+            em.getTransaction().commit();
+
+            System.out.println("Cliente adicionado com sucesso!");
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.out.println("Erro ao adicionar cliente: " + e.getMessage());
+        }
+    }
 }

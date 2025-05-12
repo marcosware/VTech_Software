@@ -13,13 +13,13 @@ import java.net.URL;
 public class ProjetoOSApplication extends Application{
 
 	@Override
-	public void start(Stage stage) throws IOException {
-		/* String fxmlPath = "TelaPrincipal.fxml"; // sem a barra inicial
+	public void start(Stage stage) throws Exception {
+		String fxmlPath = "TelaPrincipal.fxml"; // sem a barra inicial
 		URL resource = getClass().getClassLoader().getResource(fxmlPath);
 		if (resource == null) {
 			System.err.println("Arquivo FXML não encontrado no caminho: " + fxmlPath);
 			return;
-		} */
+		}
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaPrincipal.fxml"));
 		AnchorPane root = loader.load();

@@ -1,24 +1,25 @@
 package VdeVigilancia.Projeto_OS;
-import VdeVigilancia.Projeto_OS.Application.Programa;
+
 import VdeVigilancia.Projeto_OS.Dominio.Clientes;
 import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
-import VdeVigilancia.Projeto_OS.Query_Banco.Querys;
+import com.mysql.cj.xdevapi.Client;
 import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 import static VdeVigilancia.Projeto_OS.Application.Programa.em;
 
+public class Controller{
 
-
-public class Controller {
+    private int idClienteSelecionado = -1;
 
     @FXML
     Button BotaoCadastrarCliente, BotaoEntrar, CadastrarUsuario;
@@ -27,80 +28,9 @@ public class Controller {
     MenuItem BotaoCliente, BotaoUsuario, BotaoOS;
 
     @FXML
-    protected void CadastrarCliente () {
-        String nome = NomeCliente.getText();
-        String cpf = CpfCliente.getText();
-        String telefone = TelefoneCliente.getText();
-        System.out.println(telefone.length());
-        Clientes.inserirCliente ( em , nome , cpf , telefone );
-
-    }
-
+        private TextField NomeCliente,CpfCliente, TelefoneCliente;
     @FXML
-    protected void editarClientes (){
-        int id = Integer.parseInt(idCliente.getText());
-        String nome = NomeCliente.getText();
-        String Cpf = CpfCliente.getText();
-        String fone = TelefoneCliente.getText();
-
-        boolean sucesso = Clientes.editarClientes(em, id, nome, Cpf,fone);
-    }
-
-    @FXML
-    protected void removerClientes(){
-        int id = Integer.parseInt(idCliente.getText());
-        Clientes.removerCliente(id);
-    }
-
-    @FXML private TextField NomeCliente;
-    @FXML private TextField idCliente;
-    @FXML private TextField CpfCliente;
-    @FXML private TextField TelefoneCliente;
-
-    @FXML
-    protected void CadastrarUsuario () {
-        String nome = NomeUsuario.getText();
-        String email  = EmailUsuario.getText();
-        String telefone = TelefoneUsuario.getText();
-        String senha = SenhaUsuario.getText();
-        String codigoRegisto = Codigo.getText();
-         Usuarios.inserirUsuarios(em,  nome,  email, telefone, senha, codigoRegisto);
-
-    }
-    @FXML
-    protected void editarUsuario (){
-        int id = Integer.parseInt(idUsuario.getText());
-        String nome = NomeUsuario.getText(),
-                email = EmailUsuario.getText(),
-                telefone = TelefoneUsuario.getText(),
-                senha = SenhaUsuario.getText(),
-                codigo = Codigo.getText();
-
-        Usuarios.editarUsuarios(id, nome,email, telefone,senha,codigo);
-    }
-
-    @FXML
-    protected void removerUsuarios(){
-        int id = Integer.parseInt(idUsuario.getText());
-        Usuarios.removerUsuarios(id);
-    }
-
-    private void limparCampos (){
-        idUsuario.clear();
-        NomeUsuario.clear();
-        EmailUsuario.clear();
-        TelefoneUsuario.clear();
-        SenhaUsuario.clear();
-        Codigo.clear();
-    }
-
-
-    @FXML private TextField idUsuario;
-    @FXML private TextField NomeUsuario;
-    @FXML private TextField SenhaUsuario;
-    @FXML private TextField TelefoneUsuario;
-    @FXML private TextField EmailUsuario;
-    @FXML private TextField Codigo;
+    private TextField NomeUsuario, SenhaUsuario, TelefoneUsuario, EmailUsuario, Codigo;
 
     @FXML
     private TableView<Clientes> tabelaClientes;
@@ -120,72 +50,194 @@ public class Controller {
     @FXML
     private TextField filtrarField;
 
-    /* @FXML
-    public void initialize() {
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        colTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+    @FXML
+    private TextField Pesquisar;
 
-        atualizarTabela();
-    } */
 
-    public void atualizarTabela() {
-        List<Clientes> clientes = Querys.selectClientes(Programa.em);
+    @FXML
+    public void initialize(){
+        if(tabelaClientes != null){
+            ObservableList<Clientes> clientes = FXCollections.observableArrayList(
+                    new Clientes(1, "Caio", "15193439659", "971494707")
+            );
+            tabelaClientes.setItems(clientes);
+        }else {
+            System.out.println("tabelaClientes não foi inicializada!");
+        }
+        atualizaTabelasClientes();
+    }
 
-        if (clientes == null) {
-            tabelaClientes.setItems(FXCollections.observableArrayList());
+    @FXML
+    protected void CadastrarCliente() {
+        String nome = NomeCliente.getText();
+        String cpf = CpfCliente.getText();
+        String telefone = TelefoneCliente.getText();
+        System.out.println(telefone.length());
+        Clientes.menuClientes();
+
+        if(nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty()){
+            System.out.println("Por favor, preencha todos os campos.");
+            return;
+        }
+        Clientes.menuClientes();
+    }
+
+    @FXML
+    public void editarClientes() {
+       if(idClienteSelecionado == -1){
+           System.out.println("Nenhum cliente selecionado para editar.");
+           return;
+       }
+
+       try{
+           em.getTransaction().begin();
+
+           Clientes clientes = em.find(Clientes.class, idClienteSelecionado);
+
+           if(clientes != null){
+               clientes.setNome(NomeCliente.getText());
+               clientes.setCpf(CpfCliente.getText());
+               clientes.setTelefone(TelefoneCliente.getText());
+
+               em.merge(clientes);
+           }
+           em.getTransaction().commit();
+
+           atualizaTabelasClientes();
+           limparCampos();
+       }catch (Exception e){
+           if(em.getTransaction().isActive()){
+               em.getTransaction().rollback();
+           }
+           e.printStackTrace();
+       }
+
+    }
+
+
+    public void atualizaTabelasClientes(){
+        try {
+            List<Clientes> list = em.createQuery("select c from Clientes c", Clientes.class).getResultList();
+            ObservableList<Clientes> dados = FXCollections.observableArrayList(list);
+            tabelaClientes.setItems(dados);
+
+            colID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            colNome.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+            colCpf.setCellValueFactory(new PropertyValueFactory<>("CPF"));
+            colTelefone.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
+        }catch (Exception e){
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void removerClientes() {
+        if(idClienteSelecionado == -1){
+            System.out.println("Nenhum cliente selecionado para a remoção.");
             return;
         }
 
-        // Convertemos a lista normal para uma ObservableList
-        FilteredList<Clientes> dadosFiltrados = new FilteredList<>(FXCollections.observableArrayList(clientes), p -> true);
+        try {
+            em.getTransaction().begin();
 
-        // Adiciona listener no campo de filtro
-        filtrarField.textProperty().addListener((observable, oldValue, newValue) -> {
-            dadosFiltrados.setPredicate(cliente -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+            Clientes cliente = em.find(Clientes.class, idClienteSelecionado);
+            if(cliente != null){
+                em.remove(cliente);
+            }
 
-                String textoFiltro = newValue.toLowerCase();
-                return cliente.getNome().toLowerCase().contains(textoFiltro);
-            });
-        });
+            em.getTransaction().commit();
 
-        // Para ordenar corretamente junto com a tabela
-        SortedList<Clientes> dadosOrdenados = new SortedList<>(dadosFiltrados);
-        dadosOrdenados.comparatorProperty().bind(tabelaClientes.comparatorProperty());
-
-        // Exibe os dados filtrados e ordenados
-        tabelaClientes.setItems(dadosOrdenados);
+            atualizaTabelasClientes();
+            limparCampos();
+        }catch (Exception e){
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    protected void atualizarTabelaClientes() {
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        colTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-
-        atualizarTabela();
+    public void selecionarCliente(){
+        Clientes cliente = tabelaClientes.getSelectionModel().getSelectedItem();
+        if(cliente != null){
+            idClienteSelecionado = cliente.getId();
+            NomeCliente.setText(cliente.getNome());
+            CpfCliente.setText(cliente.getCpf());
+            TelefoneCliente.setText(cliente.getTelefone());
+        }
     }
 
     @FXML
-    protected void abrirTelaCliente () {
+    protected void carregarCliente (String filtro){
+        TypedQuery <Clientes> query = em.createQuery("Select c from Clientes c where lower (c.nome) like :filtro", Clientes.class);
+        query.setParameter("filtro" , "%" + filtro.toLowerCase() + "%");
+
+        List <Clientes> lista = query.getResultList();
+        ObservableList <Clientes> dados = FXCollections.observableArrayList(lista);
+        tabelaClientes.setItems(dados);
+    }
+    @FXML
+    private TextField Filtrar;
+
+    @FXML
+    private void filtrarClientes(){
+        String textoFiltro = Filtrar.getText();
+        carregarCliente(textoFiltro);
+    }
+
+
+    @FXML
+    protected void CadastrarUsuario() {
+        String nome = NomeUsuario.getText();
+        String email = EmailUsuario.getText();
+        String telefone = TelefoneUsuario.getText();
+        String senha = SenhaUsuario.getText();
+        String codigoRegisto = Codigo.getText();
+        Usuarios.inserirUsuarios(em, nome, email, telefone, senha, codigoRegisto);
+    }
+
+    @FXML
+    protected void editarUsuario() {
+        String nome = NomeUsuario.getText(),
+                email = EmailUsuario.getText(),
+                telefone = TelefoneUsuario.getText(),
+                senha = SenhaUsuario.getText(),
+                codigo = Codigo.getText();
+
+    }
+
+
+    private void limparCampos() {
+        NomeUsuario.clear();
+        EmailUsuario.clear();
+        TelefoneUsuario.clear();
+        SenhaUsuario.clear();
+        Codigo.clear();
+    }
+
+    @FXML
+    protected void abrirTelaCliente() {
         changeScreen(BotaoCliente, "/TelaClientes.fxml");
     }
 
     @FXML
-    protected void abrirTelaInicio () {
+    protected void abrirTelaInicio() {
         changeScreen(BotaoEntrar, "/TelaInicio.fxml");
     }
 
     @FXML
-    protected void abrirTelaOS () {changeScreen(BotaoOS, "/TelaOS.fxml"); }
+    protected void abrirTelaOS() {
+        changeScreen(BotaoOS, "/TelaOS.fxml");
+    }
 
     @FXML
-    protected void abrirTelaUsuario () {changeScreen(BotaoUsuario, "/TelaUsuario.fxml"); }
+    protected void abrirTelaUsuario() {
+        changeScreen(BotaoUsuario, "/TelaUsuario.fxml");
+    }
 
     @FXML
     protected void changeScreen(Button currentButton, String screen) {
@@ -194,24 +246,20 @@ public class Controller {
             AnchorPane root = loader.load();
             Scene scene = currentButton.getScene();
             scene.setRoot(root);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-        @FXML
-        protected void changeScreen(MenuItem currentMenu, String screen) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(screen));
-                AnchorPane root = loader.load();
-                Scene scene = currentMenu.getParentPopup().getOwnerWindow().getScene();
-                scene.setRoot(root);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @FXML
+    protected void changeScreen(MenuItem currentMenu, String screen) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(screen));
+            AnchorPane root = loader.load();
+            Scene scene = currentMenu.getParentPopup().getOwnerWindow().getScene();
+            scene.setRoot(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-
 }

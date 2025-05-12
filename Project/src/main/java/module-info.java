@@ -17,6 +17,7 @@ module VdeVigilancia.Projeto_OS {
     requires org.hibernate.orm.core;
     requires kernel;
     requires layout;
+    requires mysql.connector.j;
     exports VdeVigilancia.Projeto_OS.Application;
     opens VdeVigilancia.Projeto_OS to javafx.fxml;
     opens VdeVigilancia.Projeto_OS.Dominio to org.hibernate.orm.core;
