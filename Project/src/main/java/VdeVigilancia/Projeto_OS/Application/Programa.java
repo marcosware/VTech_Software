@@ -62,6 +62,9 @@ public class Programa {
             emf.close();
             sc.close();
         }
+
+        String comprovante = orcamento.gerarComprovante();
+        System.out.println(comprovante);
     }
 }
 

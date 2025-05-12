@@ -2,7 +2,6 @@ package VdeVigilancia.Projeto_OS.Dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static VdeVigilancia.Projeto_OS.Application.Programa.em;
@@ -224,6 +223,74 @@ public class Orcamento implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public String gerarComprovante() {
+        System.out.println("--- Gerar Comprovante de Orçamento ---");
+
+        System.out.print("Digite o ID do Cliente: ");
+        int clienteID;
+        try {
+            clienteID = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido.");
+            return null;
+        }
+
+        Clientes cliente = em.find(Clientes.class, clienteID);
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return null;
+        }
+
+        System.out.print("Digite o ID da Ordem de Serviço: ");
+        int osID;
+        try {
+            osID = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido.");
+            return null;
+        }
+
+        OS os = em.find(OS.class, osID);
+        if (os == null) {
+            System.out.println("Ordem de Serviço não encontrada.");
+            return null;
+        }
+
+        System.out.print("Digite o valor do orçamento: ");
+        double valor;
+        try {
+            valor = Double.parseDouble(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Valor inválido.");
+            return null;
+        }
+
+        Orcamento orcamento = new Orcamento();
+        orcamento.setCliente(cliente);
+        orcamento.setOrdemServico(os);
+        orcamento.setValor(valor);
+        orcamento.setData_Orcamento(LocalDateTime.now());
+
+        try {
+            em.getTransaction().begin();
+            em.persist(orcamento);
+            em.getTransaction().commit();
+            System.out.println("Orçamento registrado com ID: " + orcamento.getId());
+
+            // Após salvar, gera o comprovante
+            orcamento.gerarComprovante();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Erro ao salvar orçamento: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     @Override
     public String toString() {
