@@ -15,6 +15,7 @@
               <MenuItem mnemonicParsing="false" text="Cliente" />
                   <MenuItem mnemonicParsing="false" text="OS" />
                   <MenuItem mnemonicParsing="false" text="Usuários" />
+                <MenuItem mnemonicParsing="false" text="Aparelhos"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Relatório" />

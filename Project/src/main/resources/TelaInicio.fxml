@@ -8,41 +8,26 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
    <children>
-      <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
-         <image>
-            <Image url="@../../../../../../Downloads/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="108.0" layoutX="670.0" layoutY="415.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-      <Label layoutX="681.0" layoutY="434.0" text="Usuário:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="681.0" layoutY="472.0" text="Data:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ButtonBar layoutX="53.0" layoutY="193.0" prefHeight="40.0" prefWidth="200.0" />
       <MenuBar layoutX="39.0" layoutY="25.0">
         <menus>
           <Menu mnemonicParsing="false" text="Cadastro">
             <items>
               <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
-                  <MenuItem mnemonicParsing="false" text="OS" />
-                <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" text="Usuário" />
-                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" text="OS" />
+                <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" onAction="#abrirTelaUsuario" text="Usuário" />
+                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" onAction="#abrirTelaOS" text="OS" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Relatorio">
             <items>
-              <MenuItem mnemonicParsing="false" text="Relatorio" />
+              <MenuItem mnemonicParsing="false" text="Relatório cliente" />
+                  <MenuItem mnemonicParsing="false" text="Serviços" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Sobre">
@@ -52,9 +37,36 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ImageView fitHeight="242.0" fitWidth="243.0" layoutX="649.0" layoutY="72.0">
+      <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
+      <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
          <image>
-            <Image url="@../../../../../../Downloads/LogoApp.png" />
+            <Image url="@Imagens/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="126.0" layoutX="678.0" layoutY="207.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label layoutX="686.0" layoutY="221.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="686.0" layoutY="273.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="Usuario" layoutX="686.0" layoutY="247.0" prefHeight="26.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Data" layoutX="686.0" layoutY="296.0" prefHeight="21.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="442.0" fitWidth="515.0" layoutX="87.0" layoutY="62.0">
+         <image>
+            <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
    </children>
