@@ -1,64 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.cell.*?>
-<?import javafx.scene.control.TreeTableView?>
-<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.cell.TreeItemPropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="VdeVigilancia.Projeto_OS.ControllerOS">
-   <children>
-      <!-- Barra de Menu -->
-      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <menus>
-            <Menu text="Opções">
-               <items>
-                  <MenuItem fx:id="BotaoCliente" text="Clientes" onAction="#abrirTelaCliente"/>
-                  <MenuItem fx:id="BotaoUsuario" text="Usuários" onAction="#abrirTelaUsuario"/>
-                  <MenuItem fx:id="BotaoOS" text="Ordens de Serviço" onAction="#abrirTelaOS"/>
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="VdeVigilancia.Projeto_OS.ControllerOS">
 
-      <!-- Informações do Usuário e Data -->
-      <HBox spacing="10" alignment="CENTER_LEFT" layoutX="10.0" layoutY="50.0">
-         <Label text="Usuário: " />
-         <Label fx:id="Usuario" text="Administrador" />
-         <Label text="Data: " />
-         <Label fx:id="Data" text="2025-05-12" />
+   <top>
+      <HBox spacing="10" padding="10">
+         <Label text="Usuário:"/>
+         <Label fx:id="Usuario"/>
+         <Label text="Data:"/>
+         <Label fx:id="Data"/>
       </HBox>
+   </top>
 
-      <!-- TreeTableView de Clientes -->
-      <TreeTableView fx:id="treeTableClientes" layoutX="10.0" layoutY="100.0" prefWidth="500.0" prefHeight="300.0">
-         <columns>
-            <TreeTableColumn fx:id="colunaID" text="ID" />
-            <TreeTableColumn fx:id="colunaNome" text="Nome" />
-            <TreeTableColumn fx:id="colunaFone" text="Telefone" />
-         </columns>
-      </TreeTableView>
+   <center>
+      <VBox spacing="10" padding="10">
+         <HBox spacing="20">
+            <VBox spacing="5">
+               <Label text="ID do Cliente"/>
+               <TextField fx:id="txtClienteId"/>
 
-      <!-- Formulário para criação/edição de Ordem de Serviço -->
-      <VBox spacing="10" layoutX="520.0" layoutY="100.0">
-         <Label text="Criar/Editar Ordem de Serviço" />
+               <Label text="Nome do Cliente"/>
+               <TextField fx:id="txtClienteNome"/>
 
-         <TextField fx:id="txtClienteId" promptText="ID Cliente" />
-         <TextField fx:id="txtClienteNome" promptText="Nome do Cliente" editable="false" />
-         <TextField fx:id="txtEquipamento" promptText="Equipamento" />
-         <TextField fx:id="txtDefeito" promptText="Defeito" />
-         <TextField fx:id="txtServico" promptText="Serviço" />
-         <TextField fx:id="txtValorTotal" promptText="Valor Total" />
+               <Label text="Equipamento"/>
+               <TextField fx:id="txtEquipamento"/>
 
-         <CheckBox fx:id="chkOrcamento" text="Orçamento" />
-         <CheckBox fx:id="chkOrdemServico" text="Em Andamento" />
+               <Label text="Defeito"/>
+               <TextField fx:id="txtDefeito"/>
 
-         <HBox spacing="10">
-            <Button fx:id="AdicionarOS" text="Adicionar OS" onAction="#criarOS" />
-            <Button fx:id="Editar" text="Editar OS" onAction="#editarOS" />
-            <Button fx:id="APAGAR" text="Apagar OS" onAction="#removerOS" />
+               <Label text="Serviço"/>
+               <TextField fx:id="txtServico"/>
+
+               <Label text="Valor Total"/>
+               <TextField fx:id="txtValorTotal"/>
+
+               <HBox spacing="10">
+                  <CheckBox fx:id="chkOrcamento" text="Orçamento"/>
+                  <CheckBox fx:id="chkOrdemServico" text="Ordem de Serviço"/>
+               </HBox>
+
+               <HBox spacing="10">
+                  <Button fx:id="AdicionarOS" onAction="#criarOS" text="Adicionar OS">
+                     <graphic>
+                        <ImageView fitHeight="16" fitWidth="16"
+                                   image="@/VdeVigilancia/Projeto_OS/images/add.png"/>
+                     </graphic>
+                  </Button>
+
+                  <Button fx:id="Editar" onAction="#editarOS" text="Editar OS">
+                     <graphic>
+                        <ImageView fitHeight="16" fitWidth="16"
+                                   image="@/VdeVigilancia/Projeto_OS/images/edit.png"/>
+                     </graphic>
+                  </Button>
+
+                  <Button fx:id="APAGAR" onAction="#removerOS" text="Remover OS">
+                     <graphic>
+                        <ImageView fitHeight="16" fitWidth="16"
+                                   image="@/VdeVigilancia/Projeto_OS/images/delete.png"/>
+                     </graphic>
+                  </Button>
+               </HBox>
+            </VBox>
+
+            <TreeTableView fx:id="treeTableClientes" prefHeight="400" prefWidth="450">
+               <columns>
+                  <TreeTableColumn fx:id="colunaID" text="ID" prefWidth="100"/>
+                  <TreeTableColumn fx:id="colunaNome" text="Nome" prefWidth="200"/>
+                  <TreeTableColumn fx:id="colunaFone" text="Telefone" prefWidth="150"/>
+               </columns>
+            </TreeTableView>
          </HBox>
       </VBox>
-   </children>
-</AnchorPane>
+   </center>
+
+   <bottom>
+      <MenuBar>
+         <Menu text="Menu">
+            <MenuItem fx:id="BotaoCliente" text="Clientes" onAction="#abrirTelaCliente"/>
+            <MenuItem fx:id="BotaoUsuario" text="Usuários" onAction="#abrirTelaUsuario"/>
+            <MenuItem fx:id="BotaoOS" text="Ordens de Serviço" onAction="#abrirTelaOS"/>
+         </Menu>
+      </MenuBar>
+   </bottom>
+
+</BorderPane>

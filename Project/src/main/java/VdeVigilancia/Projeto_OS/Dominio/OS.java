@@ -1,57 +1,45 @@
 package VdeVigilancia.Projeto_OS.Dominio;
 
-import VdeVigilancia.Projeto_OS.Query_Banco.Querys;
+import VdeVigilancia.Projeto_OS.Dominio.Aparelhos_Clientes;
+import VdeVigilancia.Projeto_OS.Dominio.Clientes;
+import VdeVigilancia.Projeto_OS.Dominio.StatusOS;
 
 import javax.persistence.*;
-import javax.sound.midi.Soundbank;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Random;
-
-import static VdeVigilancia.Projeto_OS.Application.Programa.sc;
 
 @Entity
-
-public class  OS implements Serializable {
+public class OS implements Serializable {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private LocalDate abertura;
 
     private LocalDate fechamento;
-    
-    private String Servicos;
 
-    public String getServicos() {
-        return Servicos;
-    }
-
-    public void setServicos(String servicos) {
-        Servicos = servicos;
-    }
-
-    @Column (columnDefinition = "Text" , nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String descricao;
 
     @Enumerated(EnumType.STRING)
-    @Column (nullable = false)
-
+    @Column(nullable = false)
     private StatusOS status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "cliente_id" , nullable = false)
-
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Clientes cliente;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "aparelhos_id" , nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "aparelhos_id", nullable = false)
     private Aparelhos_Clientes aparelho;
 
-    public OS() {
-    }
+    private String servico;
+
+    private double valorTotal;
+
+    public OS() {}
 
     public OS(Aparelhos_Clientes aparelho, Clientes cliente, StatusOS status, String descricao, LocalDate fechamento, LocalDate abertura) {
         this.aparelho = aparelho;
@@ -60,120 +48,34 @@ public class  OS implements Serializable {
         this.descricao = descricao;
         this.fechamento = fechamento;
         this.abertura = abertura;
-
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public LocalDate getAbertura() { return abertura; }
+    public void setAbertura(LocalDate abertura) { this.abertura = abertura; }
 
-    public Aparelhos_Clientes getAparelho() {
-        return aparelho;
-    }
+    public LocalDate getFechamento() { return fechamento; }
+    public void setFechamento(LocalDate fechamento) { this.fechamento = fechamento; }
 
-    public void setAparelho() {
-        this.aparelho = aparelho;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public Clientes getCliente() {
-        return cliente;
-    }
+    public StatusOS getStatus() { return status; }
+    public void setStatus(StatusOS status) { this.status = status; }
 
-    public void setCliente (Clientes cliente) {
-        this.cliente = cliente;
-    }
+    public Clientes getCliente() { return cliente; }
+    public void setCliente(Clientes cliente) { this.cliente = cliente; }
 
-    public StatusOS getStatus() {
-        return status;
-    }
+    public Aparelhos_Clientes getAparelho() { return aparelho; }
+    public void setAparelho(Aparelhos_Clientes aparelho) { this.aparelho = aparelho; }
 
-    public void setStatus(StatusOS status) {
-        this.status = status;
-    }
+    public String getServico() { return servico; }
+    public void setServico(String servico) { this.servico = servico; }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public LocalDate getFechamento() {
-        return fechamento;
-    }
-
-    public void setFechamento(LocalDate fechamento) {
-        this.fechamento = fechamento;
-    }
-
-    public LocalDate getAbertura() {
-        return abertura;
-    }
-
-    public void setAbertura(LocalDate abertura) {
-        this.abertura = abertura;
-    }
-
-
-    public void criarOSAutomatica(EntityManager em) {
-        try {
-            Querys query = new Querys();
-
-            System.out.print("Insira o ID do cliente: ");
-            int idCliente = Integer.parseInt(sc.nextLine());
-            Clientes cliente = em.find(Clientes.class, idCliente);
-
-            if (cliente == null) {
-                System.out.println("Cliente não encontrado.");
-                return;
-            }
-
-            Aparelhos_Clientes aparelho = query.selectWhereAparelhos();
-            if (aparelho == null) {
-                System.out.println("Aparelho não encontrado.");
-                return;
-            }
-
-            System.out.print("Descrição da Ordem de Serviço: ");
-            String descricao = sc.nextLine();
-
-            if (descricao == null || descricao.trim().isEmpty()) {
-                System.out.println("Descrição não pode ser vazia.");
-                return;
-            }
-
-            StatusOS[] statusOS = StatusOS.values();
-            StatusOS status = statusOS[new Random().nextInt(statusOS.length)];
-
-            em.getTransaction().begin();
-
-            OS novaOS = new OS();
-            novaOS.setAbertura(LocalDate.now());
-            novaOS.setStatus(status);
-            novaOS.setDescricao(descricao);
-            novaOS.setCliente(cliente);
-            novaOS.setAparelho();
-
-            em.persist(novaOS);  // use persist em vez de merge para novo registro
-
-            em.getTransaction().commit();
-            System.out.println("OS criada com sucesso! ID: " + novaOS.getId());
-
-        } catch (NumberFormatException e) {
-            System.out.println("ID inválido. Use apenas números.");
-        } catch (Exception e) {
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            System.out.println("Erro ao criar OS: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+    public double getValorTotal() { return valorTotal; }
+    public void setValorTotal(double valorTotal) { this.valorTotal = valorTotal; }
 
     @Override
     public String toString() {
@@ -185,12 +87,11 @@ public class  OS implements Serializable {
                 ", status=" + status +
                 ", cliente=" + cliente +
                 ", aparelho=" + aparelho +
+                ", servico='" + servico + '\'' +
+                ", valorTotal=" + valorTotal +
                 '}';
     }
 
-    public void setServico(String text) {
-    }
-
-    public void setValorTotal(double v) {
+    public void criarOSAutomatica(EntityManager em) {
     }
 }
