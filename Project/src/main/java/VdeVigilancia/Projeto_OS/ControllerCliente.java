@@ -1,7 +1,6 @@
 package VdeVigilancia.Projeto_OS;
 
 import VdeVigilancia.Projeto_OS.Dominio.Clientes;
-import VdeVigilancia.Projeto_OS.Dominio.JPAUtil;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,10 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-import javax.persistence.EntityManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static VdeVigilancia.Projeto_OS.Application.Programa.em;
 
 public class ControllerCliente implements Initializable {
 
@@ -58,7 +58,6 @@ public class ControllerCliente implements Initializable {
     }
 
     public void atualizarTabela() {
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             List<Clientes> clientes = em.createQuery("SELECT C FROM Clientes C", Clientes.class).getResultList();
             tabelaCliente.setItems(FXCollections.observableArrayList(clientes));
@@ -69,7 +68,6 @@ public class ControllerCliente implements Initializable {
 
     @FXML
     public void criarCliente(ActionEvent event) {
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             Clientes cliente = new Clientes();
             cliente.setNome(NomeCliente.getText());
@@ -88,7 +86,6 @@ public class ControllerCliente implements Initializable {
 
     @FXML
     public void editarClientes(ActionEvent event) {
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             Clientes selecionado = tabelaCliente.getSelectionModel().getSelectedItem();
             if (selecionado != null) {
@@ -116,7 +113,6 @@ public class ControllerCliente implements Initializable {
 
     @FXML
     public void removerClientes(ActionEvent event) {
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             Clientes cliente = tabelaCliente.getSelectionModel().getSelectedItem();
             if (cliente != null) {
@@ -146,7 +142,6 @@ public class ControllerCliente implements Initializable {
     @FXML
     public void onBuscarClick(ActionEvent event) {
         String filtro = campoBusca.getText();
-        EntityManager em = JPAUtil.getEntityManager();
         List<Clientes> resultados = em.createQuery(
                         "SELECT C FROM Clientes C WHERE CAST(C.id AS string) LIKE :filtro", Clientes.class)
                 .setParameter("filtro", "%" + filtro + "%").getResultList();

@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.ControllerOS">
    <children>
       <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
          <image>
@@ -62,26 +62,24 @@
             <Image url="@Imagens/LUPA.png" />
          </image>
       </ImageView>
-      <TreeTableView layoutX="325.0" layoutY="169.0" prefHeight="126.0" prefWidth="278.0">
+      <TreeTableView fx:id="TabelasClientes" layoutX="325.0" layoutY="169.0" prefHeight="126.0" prefWidth="278.0">
          <columns>
             <TreeTableColumn prefWidth="88.0" text="id" />
             <TreeTableColumn prefWidth="88.0" text="Nome" />
             <TreeTableColumn prefWidth="88.0" text="Telefone" />
          </columns>
       </TreeTableView>
-      <TextField layoutX="130.0" layoutY="320.0" prefHeight="25.0" prefWidth="391.0" />
-      <TextField layoutX="130.0" layoutY="350.0" prefHeight="25.0" prefWidth="391.0" />
-      <TextField layoutX="130.0" layoutY="380.0" prefHeight="25.0" prefWidth="391.0" />
-      <TextField layoutX="130.0" layoutY="410.0" prefHeight="25.0" prefWidth="116.0" />
+      <TextField fx:id="EquipamentosOS" layoutX="130.0" layoutY="320.0" prefHeight="25.0" prefWidth="391.0" />
+      <TextField fx:id="DefeitoOS" layoutX="130.0" layoutY="350.0" prefHeight="25.0" prefWidth="391.0" />
+      <TextField fx:id="ServicoOS" layoutX="130.0" layoutY="380.0" prefHeight="25.0" prefWidth="391.0" />
       <Label layoutX="53.0" layoutY="324.0" text="Equipamento" textFill="WHITE" />
       <Label layoutX="69.0" layoutY="354.0" text="Defeito" textFill="WHITE" />
       <Label layoutX="69.0" layoutY="384.0" text="Serviço" textFill="WHITE" />
-      <Label layoutX="68.0" layoutY="414.0" text="Tecnico" textFill="WHITE" />
-      <TextField layoutX="367.0" layoutY="411.0" prefHeight="25.0" prefWidth="116.0" promptText="0" />
-      <Label layoutX="301.0" layoutY="415.0" text="Valor Total" textFill="WHITE" />
-      <Button fx:id="MAIS" layoutX="99.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" />
-      <Button fx:id="Editar" layoutX="194.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" />
-      <Button fx:id="APAGAR" layoutX="290.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" textFill="WHITE" />
+      <TextField fx:id="ValorTotal" layoutX="130.0" layoutY="412.0" prefHeight="25.0" prefWidth="116.0" promptText="0" />
+      <Label layoutX="60.0" layoutY="416.0" text="Valor Total" textFill="WHITE" />
+      <Button fx:id="MAIS" layoutX="99.0" layoutY="457.0" mnemonicParsing="false" onAction="#adicionarOS" opacity="0.25" prefHeight="53.0" prefWidth="81.0" />
+      <Button fx:id="Editar" layoutX="194.0" layoutY="457.0" mnemonicParsing="false" onAction="#editarOS" opacity="0.25" prefHeight="53.0" prefWidth="81.0" />
+      <Button fx:id="deletarOS" layoutX="290.0" layoutY="457.0" mnemonicParsing="false" onAction="#removerOS" opacity="0.25" prefHeight="53.0" prefWidth="81.0" textFill="WHITE" />
       <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="107.0" layoutY="457.0">
          <image>
             <Image url="@Imagens/MAIS.png" />
@@ -129,7 +127,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="APAGAR1" layoutX="385.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" textFill="WHITE" />
+      <Button fx:id="Comprovante" layoutX="385.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" textFill="WHITE" />
       <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="393.0" layoutY="457.0">
          <image>
             <Image url="@Imagens/impressora.png" />

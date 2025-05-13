@@ -1,25 +1,13 @@
  package VdeVigilancia.Projeto_OS;
 
-import VdeVigilancia.Projeto_OS.Dominio.Clientes;
-import VdeVigilancia.Projeto_OS.Dominio.JPAUtil;
-import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-
-import javax.persistence.EntityManager;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
-public class Controller {
+ public class Controller {
 
     public Button botaoFiltrar;
     @FXML

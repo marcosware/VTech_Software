@@ -79,13 +79,11 @@ public class Clientes implements Serializable {
             this.ordemServico = new ArrayList<>();
         }
         this.ordemServico.add(os);
-        os.setCliente(this);
     }
 
     public void removeOS(OS os) {
         if (this.ordemServico != null) {
             this.ordemServico.remove(os);
-            os.setCliente(null);
         }
     }
 

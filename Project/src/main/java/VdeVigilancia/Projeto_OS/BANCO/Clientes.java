@@ -1,4 +1,4 @@
-/*package VdeVigilancia.Projeto_OS.BANCO;
+package VdeVigilancia.Projeto_OS.BANCO;
 
 public class Clientes {
     private int id;
@@ -56,4 +56,3 @@ public class Clientes {
         Nome = nome;
     }
 }
-*/
