@@ -1,13 +1,12 @@
 /* package VdeVigilancia.Projeto_OS;
 
-import VdeVigilancia.Projeto_OS.Dominio.JPAUtil;
 import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
-import javax.persistence.EntityManager;
+import static VdeVigilancia.Projeto_OS.Application.Programa.em;
 
 public class ControllerUsuario {
 
@@ -33,7 +32,6 @@ public class ControllerUsuario {
 
     @FXML
     protected void editarUsuario() {
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             Integer id = Integer.parseInt(campoID.getText()); // usamos o código como identificador único
             Usuarios usuario = em.find(Usuarios.class, id);
@@ -75,7 +73,6 @@ public class ControllerUsuario {
     }
 
     public void CadastrarUsuario(ActionEvent actionEvent) {
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             Usuarios usuario = new Usuarios();
             usuario.setNome(NomeUsuarios.getText());
@@ -98,7 +95,6 @@ public class ControllerUsuario {
     }
 
     private void deletarUsuario(){
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             Integer id = Integer.parseInt(campoID.getText());
             Usuarios usuario = em.find(Usuarios.class, id);
@@ -140,7 +136,6 @@ public class ControllerUsuario {
     }
 
     public void pesquisarCliente(ActionEvent actionEvent) {
-        EntityManager em = JPAUtil.getEntityManager();
         try{
             String textoID = campoID.getText();
             if(textoID == null || textoID.isEmpty()){
