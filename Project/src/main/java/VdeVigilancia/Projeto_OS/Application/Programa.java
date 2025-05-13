@@ -1,4 +1,4 @@
-package VdeVigilancia.Projeto_OS.Application;
+/* package VdeVigilancia.Projeto_OS.Application;
 
 import VdeVigilancia.Projeto_OS.Dominio.*;
 import VdeVigilancia.Projeto_OS.Query_Banco.Querys;
@@ -22,7 +22,7 @@ public class Programa {
         Querys querys = new Querys();
         Orcamento orcamento = new Orcamento();
 
-        /*querys.selectClientes();*/
+        querys.selectClientes();
 
         System.out.println("----------------------------- MENU OPÇÕES -----------------------------");
         System.out.println("1 - Clientes");
@@ -66,5 +66,4 @@ public class Programa {
         String comprovante = orcamento.gerarComprovante();
         System.out.println(comprovante);
     }
-}
-
+} */

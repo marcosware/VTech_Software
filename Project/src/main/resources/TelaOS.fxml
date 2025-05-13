@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,92 +18,80 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.Controller">
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.ControllerOS">
    <children>
-      <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="50.0">
+      <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="59.0">
          <image>
             <Image url="@Imagens/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="242.0" fitWidth="243.0" layoutX="649.0" layoutY="72.0">
-         <image>
-            <Image url="@Imagens/LogoApp.png" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="126.0" layoutX="680.0" layoutY="397.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-      <Label layoutX="688.0" layoutY="411.0" text="Usuário:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="688.0" layoutY="463.0" text="Data:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <ButtonBar layoutX="53.0" layoutY="193.0" prefHeight="40.0" prefWidth="200.0" />
-      <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="133.0" layoutX="49.0" layoutY="99.0" stroke="WHITE" strokeType="INSIDE" width="232.0" />
-      <Label layoutX="64.0" layoutY="113.0" text="N° OS" textFill="WHITE" />
-      <Label layoutX="307.0" layoutY="72.0" text="Cliente" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="62.0" layoutY="141.0" prefHeight="25.0" prefWidth="75.0" />
-      <CheckBox layoutX="64.0" layoutY="185.0" mnemonicParsing="false" text="Orçamento" textFill="WHITE" />
-      <CheckBox layoutX="153.0" layoutY="185.0" mnemonicParsing="false" text="Ordem de Serviço" textFill="WHITE" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="214.0" layoutX="301.0" layoutY="99.0" stroke="WHITE" strokeType="INSIDE" width="323.0" />
-      <TextField layoutX="326.0" layoutY="139.0" prefHeight="25.0" prefWidth="116.0" />
-      <TextField layoutX="153.0" layoutY="141.0" prefHeight="25.0" prefWidth="116.0" />
-      <Label layoutX="504.0" layoutY="143.0" text="ID" textFill="WHITE" />
-      <TextField layoutX="537.0" layoutY="139.0" prefHeight="25.0" prefWidth="65.0" />
-      <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="456.0" layoutY="139.0">
-         <image>
-            <Image url="@Imagens/LUPA.png" />
-         </image>
-      </ImageView>
-      <TreeTableView layoutX="325.0" layoutY="169.0" prefHeight="126.0" prefWidth="278.0">
+      <TableView fx:id="tabelaOS" layoutX="56.0" layoutY="118.0" onMouseClicked="#selecionarOS" prefHeight="398.0" prefWidth="554.0">
          <columns>
-            <TreeTableColumn prefWidth="88.0" text="id" />
-            <TreeTableColumn prefWidth="88.0" text="Nome" />
-            <TreeTableColumn prefWidth="88.0" text="Telefone" />
+            <TableColumn fx:id="colunaID" prefWidth="36.800018310546875" text="ID" />
+            <TableColumn fx:id="colunaCliente" prefWidth="99.1999740600586" text="Cliente" />
+            <TableColumn fx:id="colunaAparelho" prefWidth="120.0" text="Aparelho" />
+            <TableColumn fx:id="colunaServico" prefWidth="131.20001220703125" text="Serviço" />
+            <TableColumn fx:id="colunaValorTotal" prefWidth="82.39999389648438" text="Valor Total" />
+            <TableColumn fx:id="colunaStatus" prefWidth="84.79998779296875" text="Status" />
          </columns>
-      </TreeTableView>
-      <TextField layoutX="130.0" layoutY="320.0" prefHeight="25.0" prefWidth="391.0" />
-      <TextField layoutX="130.0" layoutY="350.0" prefHeight="25.0" prefWidth="391.0" />
-      <TextField layoutX="130.0" layoutY="380.0" prefHeight="25.0" prefWidth="391.0" />
-      <TextField layoutX="130.0" layoutY="410.0" prefHeight="25.0" prefWidth="116.0" />
-      <Label layoutX="53.0" layoutY="324.0" text="Equipamento" textFill="WHITE" />
-      <Label layoutX="69.0" layoutY="354.0" text="Defeito" textFill="WHITE" />
-      <Label layoutX="69.0" layoutY="384.0" text="Serviço" textFill="WHITE" />
-      <Label layoutX="68.0" layoutY="414.0" text="Tecnico" textFill="WHITE" />
-      <TextField layoutX="367.0" layoutY="411.0" prefHeight="25.0" prefWidth="116.0" promptText="0" />
-      <Label layoutX="301.0" layoutY="415.0" text="Valor Total" textFill="WHITE" />
-      <Button fx:id="MAIS" layoutX="99.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" />
-      <Button fx:id="Editar" layoutX="194.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" />
-      <Button fx:id="APAGAR" layoutX="290.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" textFill="WHITE" />
-      <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="107.0" layoutY="457.0">
-         <image>
-            <Image url="@Imagens/MAIS.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="206.0" layoutY="454.0">
-         <image>
-            <Image url="@Imagens/EDITAR.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="298.0" layoutY="457.0">
-         <image>
-            <Image url="@Imagens/Excluir.png" />
-         </image>
-      </ImageView>
-      <MenuBar layoutX="40.0" layoutY="25.0">
+      </TableView>
+      <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="72.0" layoutX="680.0" layoutY="448.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="685.0" layoutY="453.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="683.0" layoutY="487.0" prefHeight="27.0" prefWidth="49.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="usuarioLogado" layoutX="763.0" layoutY="453.0" prefHeight="26.0" prefWidth="111.0" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="dataAtual" layoutX="763.0" layoutY="487.0" prefHeight="26.0" prefWidth="102.0" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="BotaoCadastrar" layoutX="676.0" layoutY="330.0" mnemonicParsing="false" onAction="#cadastrarOS" text="Cadastrar" />
+      <Button fx:id="BotaoEditar" layoutX="803.0" layoutY="330.0" mnemonicParsing="false" onAction="#editarOS" prefHeight="26.0" prefWidth="66.0" text="Editar" />
+      <Button fx:id="BotaoExcluir" layoutX="676.0" layoutY="408.0" mnemonicParsing="false" onAction="#removerOS" prefHeight="26.0" prefWidth="66.0" text="Excluir" />
+      <Button fx:id="botaoFiltrar" layoutX="575.0" layoutY="77.0" mnemonicParsing="false" onAction="#onBuscarClick" prefHeight="26.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imagens/Pesquisar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="campoBusca" layoutX="59.0" layoutY="77.0" prefHeight="26.0" prefWidth="497.0" promptText="Buscar cliente por ID" />
+      <Label layoutX="679.0" layoutY="100.0" text="Aparelho" textFill="#fffafa" />
+      <Label layoutX="681.0" layoutY="145.0" text="Serviço" textFill="#fffafa" />
+      <TextField fx:id="txtServico" layoutX="750.0" layoutY="140.0" prefHeight="26.0" prefWidth="128.0" promptText="Serviço" />
+      <Label layoutX="681.0" layoutY="195.0" text="Valor Total" textFill="#fffafa" />
+      <TextField fx:id="txtValorTotal" layoutX="750.0" layoutY="190.0" prefHeight="26.0" prefWidth="128.0" promptText="Valor Total" />
+      <Label layoutX="681.0" layoutY="235.0" text="Status" textFill="#fffafa" />
+      <RadioButton fx:id="radioAberta" layoutX="678.0" layoutY="258.0" mnemonicParsing="false" text="Aberta" textFill="WHITE">
+         <toggleGroup>
+            <ToggleGroup fx:id="statusGroup" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="radioAndamento" layoutX="765.0" layoutY="258.0" mnemonicParsing="false" text="Em andamento" textFill="WHITE" toggleGroup="$statusGroup" />
+      <RadioButton fx:id="radioCancelada" layoutX="765.0" layoutY="296.0" mnemonicParsing="false" text="Cancelada" textFill="WHITE" toggleGroup="$statusGroup" />
+      <RadioButton fx:id="radioFechada" layoutX="678.0" layoutY="296.0" mnemonicParsing="false" text="Fechada" textFill="WHITE" toggleGroup="$statusGroup" />
+      <Label layoutX="678.0" layoutY="55.0" text="Cliente" textFill="#fffafa" />
+      <TextField fx:id="txtCliente" layoutX="748.0" layoutY="50.0" onKeyTyped="#atualizarAparelho" prefHeight="26.0" prefWidth="128.0" promptText="Cliente" />
+      <ChoiceBox fx:id="menuAparelhos" layoutX="748.0" layoutY="95.0" prefHeight="26.0" prefWidth="128.0" />
+      <MenuBar layoutX="50.0" layoutY="25.0">
          <menus>
             <Menu mnemonicParsing="false" text="Cadastro">
                <items>
                   <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
-                  <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" onAction="#abrirTelaUsuario" text="Usuário" />
+                  <MenuItem fx:id="BotaoAparelho" mnemonicParsing="false" onAction="#abrirTelaAparelho" text="Aparelho" />
                   <MenuItem fx:id="BotaoOS" mnemonicParsing="false" onAction="#abrirTelaOS" text="OS" />
                </items>
             </Menu>
@@ -119,21 +108,5 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Label fx:id="Usuario" layoutX="688.0" layoutY="437.0" prefHeight="26.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="Data" layoutX="688.0" layoutY="486.0" prefHeight="21.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Button fx:id="APAGAR1" layoutX="385.0" layoutY="457.0" mnemonicParsing="false" opacity="0.25" prefHeight="53.0" prefWidth="81.0" textFill="WHITE" />
-      <ImageView fitHeight="53.0" fitWidth="65.0" layoutX="393.0" layoutY="457.0">
-         <image>
-            <Image url="@Imagens/impressora.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
