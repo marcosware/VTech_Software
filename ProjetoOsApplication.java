@@ -15,7 +15,7 @@ public class ProjetoOsApplication extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(ProjetoOsApplication.class.getResource("/TelaPrincipal.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(ProjetoOsApplication.class.getResource("/TelaLogin.fxml"));
 		AnchorPane root = fxmlLoader.load();
 		Scene scene = new Scene(root);
 		stage.setTitle("Hello!");

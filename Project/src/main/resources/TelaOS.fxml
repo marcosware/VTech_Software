@@ -1,64 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.cell.*?>
-<?import javafx.scene.control.TreeTableView?>
-<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="VdeVigilancia.Projeto_OS.ControllerOS">
+<AnchorPane prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VdeVigilancia.Projeto_OS.ControllerOS">
    <children>
-      <!-- Barra de Menu -->
-      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ImageView fitHeight="473.0" fitWidth="610.0" layoutX="39.0" layoutY="59.0">
+         <image>
+            <Image url="@Imagens/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tabelaOS" layoutX="56.0" layoutY="118.0" onMouseClicked="#selecionarOS" prefHeight="398.0" prefWidth="554.0">
+         <columns>
+            <TableColumn fx:id="colunaID" prefWidth="36.800018310546875" text="ID" />
+            <TableColumn fx:id="colunaCliente" prefWidth="99.1999740600586" text="Cliente" />
+            <TableColumn fx:id="colunaAparelho" prefWidth="120.0" text="Aparelho" />
+            <TableColumn fx:id="colunaServico" prefWidth="131.20001220703125" text="Serviço" />
+            <TableColumn fx:id="colunaValorTotal" prefWidth="82.39999389648438" text="Valor Total" />
+            <TableColumn fx:id="colunaStatus" prefWidth="84.79998779296875" text="Status" />
+         </columns>
+      </TableView>
+      <Line endX="-122.0" endY="-201.0" layoutX="782.0" layoutY="247.0" startX="-122.0" startY="273.0" stroke="WHITE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="72.0" layoutX="680.0" layoutY="448.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="685.0" layoutY="453.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="683.0" layoutY="487.0" prefHeight="27.0" prefWidth="49.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="usuarioLogado" layoutX="763.0" layoutY="453.0" prefHeight="26.0" prefWidth="111.0" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="dataAtual" layoutX="763.0" layoutY="487.0" prefHeight="26.0" prefWidth="102.0" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="BotaoCadastrar" layoutX="676.0" layoutY="330.0" mnemonicParsing="false" onAction="#cadastrarOS" text="Cadastrar" />
+      <Button fx:id="BotaoEditar" layoutX="803.0" layoutY="330.0" mnemonicParsing="false" onAction="#editarOS" prefHeight="26.0" prefWidth="66.0" text="Editar" />
+      <Button fx:id="BotaoExcluir" layoutX="676.0" layoutY="408.0" mnemonicParsing="false" onAction="#removerOS" prefHeight="26.0" prefWidth="66.0" text="Excluir" />
+      <Button fx:id="botaoFiltrar" layoutX="575.0" layoutY="77.0" mnemonicParsing="false" onAction="#onBuscarClick" prefHeight="26.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fx:id="pesquisa" fitHeight="18.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imagens/Pesquisar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="campoBusca" layoutX="59.0" layoutY="77.0" prefHeight="26.0" prefWidth="497.0" promptText="Buscar cliente por ID" />
+      <Label layoutX="679.0" layoutY="100.0" text="Aparelho" textFill="#fffafa" />
+      <Label layoutX="681.0" layoutY="145.0" text="Serviço" textFill="#fffafa" />
+      <TextField fx:id="txtServico" layoutX="750.0" layoutY="140.0" prefHeight="26.0" prefWidth="128.0" promptText="Serviço" />
+      <Label layoutX="681.0" layoutY="195.0" text="Valor Total" textFill="#fffafa" />
+      <TextField fx:id="txtValorTotal" layoutX="750.0" layoutY="190.0" prefHeight="26.0" prefWidth="128.0" promptText="Valor Total" />
+      <Label layoutX="681.0" layoutY="235.0" text="Status" textFill="#fffafa" />
+      <RadioButton fx:id="radioAberta" layoutX="678.0" layoutY="258.0" mnemonicParsing="false" text="Aberta" textFill="WHITE">
+         <toggleGroup>
+            <ToggleGroup fx:id="statusGroup" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="radioAndamento" layoutX="765.0" layoutY="258.0" mnemonicParsing="false" text="Em andamento" textFill="WHITE" toggleGroup="$statusGroup" />
+      <RadioButton fx:id="radioCancelada" layoutX="765.0" layoutY="296.0" mnemonicParsing="false" text="Cancelada" textFill="WHITE" toggleGroup="$statusGroup" />
+      <RadioButton fx:id="radioFechada" layoutX="678.0" layoutY="296.0" mnemonicParsing="false" text="Fechada" textFill="WHITE" toggleGroup="$statusGroup" />
+      <Label layoutX="678.0" layoutY="55.0" text="Cliente" textFill="#fffafa" />
+      <TextField fx:id="txtCliente" layoutX="748.0" layoutY="50.0" onKeyTyped="#atualizarAparelho" prefHeight="26.0" prefWidth="128.0" promptText="Cliente" />
+      <ChoiceBox fx:id="menuAparelhos" layoutX="748.0" layoutY="95.0" prefHeight="26.0" prefWidth="128.0" />
+      <MenuBar layoutX="50.0" layoutY="25.0">
          <menus>
-            <Menu text="Opções">
+            <Menu mnemonicParsing="false" text="Cadastro">
                <items>
-                  <MenuItem fx:id="BotaoCliente" text="Clientes" onAction="#abrirTelaCliente"/>
-                  <MenuItem fx:id="BotaoUsuario" text="Usuários" onAction="#abrirTelaUsuario"/>
-                  <MenuItem fx:id="BotaoOS" text="Ordens de Serviço" onAction="#abrirTelaOS"/>
+                  <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
+                  <MenuItem fx:id="BotaoAparelho" mnemonicParsing="false" onAction="#abrirTelaAparelho" text="Aparelho" />
+                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" onAction="#abrirTelaOS" text="OS" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatorio">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Relatório cliente" />
+                  <MenuItem mnemonicParsing="false" text="Serviços" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sobre">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
-
-      <!-- Informações do Usuário e Data -->
-      <HBox spacing="10" alignment="CENTER_LEFT" layoutX="10.0" layoutY="50.0">
-         <Label text="Usuário: " />
-         <Label fx:id="Usuario" text="Administrador" />
-         <Label text="Data: " />
-         <Label fx:id="Data" text="2025-05-12" />
-      </HBox>
-
-      <!-- TreeTableView de Clientes -->
-      <TreeTableView fx:id="treeTableClientes" layoutX="10.0" layoutY="100.0" prefWidth="500.0" prefHeight="300.0">
-         <columns>
-            <TreeTableColumn fx:id="colunaID" text="ID" />
-            <TreeTableColumn fx:id="colunaNome" text="Nome" />
-            <TreeTableColumn fx:id="colunaFone" text="Telefone" />
-         </columns>
-      </TreeTableView>
-
-      <!-- Formulário para criação/edição de Ordem de Serviço -->
-      <VBox spacing="10" layoutX="520.0" layoutY="100.0">
-         <Label text="Criar/Editar Ordem de Serviço" />
-
-         <TextField fx:id="txtClienteId" promptText="ID Cliente" />
-         <TextField fx:id="txtClienteNome" promptText="Nome do Cliente" editable="false" />
-         <TextField fx:id="txtEquipamento" promptText="Equipamento" />
-         <TextField fx:id="txtDefeito" promptText="Defeito" />
-         <TextField fx:id="txtServico" promptText="Serviço" />
-         <TextField fx:id="txtValorTotal" promptText="Valor Total" />
-
-         <CheckBox fx:id="chkOrcamento" text="Orçamento" />
-         <CheckBox fx:id="chkOrdemServico" text="Em Andamento" />
-
-         <HBox spacing="10">
-            <Button fx:id="AdicionarOS" text="Adicionar OS" onAction="#criarOS" />
-            <Button fx:id="Editar" text="Editar OS" onAction="#editarOS" />
-            <Button fx:id="APAGAR" text="Apagar OS" onAction="#removerOS" />
-         </HBox>
-      </VBox>
    </children>
 </AnchorPane>

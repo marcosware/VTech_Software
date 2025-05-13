@@ -19,9 +19,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="Cadastro">
             <items>
-              <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
-                <MenuItem fx:id="BotaoUsuario" mnemonicParsing="false" onAction="#abrirTelaUsuario" text="Usuário" />
-                  <MenuItem fx:id="BotaoOS" mnemonicParsing="false" onAction="#abrirTelaOS" text="OS" />
+                <MenuItem fx:id="BotaoCliente" mnemonicParsing="false" onAction="#abrirTelaCliente" text="Cliente" />
+                <MenuItem fx:id="BotaoAparelho" mnemonicParsing="false" onAction="#abrirTelaAparelho" text="Aparelho" />
+                <MenuItem fx:id="BotaoOS" mnemonicParsing="false" onAction="#abrirTelaOS" text="OS" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Relatorio">

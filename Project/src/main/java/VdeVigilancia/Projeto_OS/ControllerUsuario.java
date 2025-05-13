@@ -1,4 +1,4 @@
-package VdeVigilancia.Projeto_OS;
+/* package VdeVigilancia.Projeto_OS;
 
 import VdeVigilancia.Projeto_OS.Dominio.JPAUtil;
 import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
@@ -168,3 +168,4 @@ public class ControllerUsuario {
         }
 }
 
+*/

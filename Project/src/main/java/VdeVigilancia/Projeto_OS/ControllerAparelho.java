@@ -24,19 +24,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ControllerCliente implements Initializable {
+public class ControllerAparelho implements Initializable {
 
     @FXML
-    private TextField NomeCliente, CpfCliente, TelefoneCliente, EmailCliente, campoBusca;
+    private TextField txtCliente, txtMarca, txtVersao, txtSerie, campoBusca;
 
     @FXML
-    public TableView<Clientes> tabelaCliente;
+    public TableView<Aparelhos> tabelaAparelho;
 
     @FXML
-    public TableColumn<Clientes, Integer> colunaID;
+    public TableColumn<Aparelhos, Integer> colunaID;
 
     @FXML
-    public TableColumn<Clientes, String> colunaNome, colunaCpf, colunaTelefone, colunaEmail;
+    public TableColumn<Aparelhos, String> colunaMarca, colunaVersao, colunaSerie, colunaCliente;
 
     @FXML
     public Button BotaoCadastrar, BotaoEditar, BotaoExcluir, botaoFiltrar;
@@ -49,104 +49,104 @@ public class ControllerCliente implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Inicializando tela de clientes...");
+        System.out.println("Inicializando tela de aparelhos...");
         colunaID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colunaCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        colunaTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        colunaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colunaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        colunaMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        colunaVersao.setCellValueFactory(new PropertyValueFactory<>("versao"));
+        colunaSerie.setCellValueFactory(new PropertyValueFactory<>("serie"));
         usuarioLogado.setText(DatabaseManager.nomeLogged);
         dataAtual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         atualizarTabela();
     }
 
-    public void limparCamposClientes() {
-        NomeCliente.clear();
-        CpfCliente.clear();
-        TelefoneCliente.clear();
-        EmailCliente.clear();
+    public void limparCampos() {
+        txtCliente.clear();
+        txtMarca.clear();
+        txtSerie.clear();
+        txtVersao.clear();
     }
 
     public void atualizarTabela() {
         try{
-            ObservableList<Clientes> clientes = DatabaseManager.getListClientes("", "");
-            tabelaCliente.setItems(FXCollections.observableArrayList(clientes));
+            ObservableList<Aparelhos> aparelhos = DatabaseManager.getListAparelhos("", "");
+            tabelaAparelho.setItems(FXCollections.observableArrayList(aparelhos));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    public void criarCliente() {
+    public void cadastrarAparelho() {
         try {
-            String nome = NomeCliente.getText();
-            String cpf = CpfCliente.getText();
-            String telefone = TelefoneCliente.getText();
-            String email = EmailCliente.getText();
-            String[] values = {nome, cpf, telefone, email};
-            DatabaseManager.insertAll("Clientes", values);
+            String marca = txtMarca.getText();
+            String versao = txtVersao.getText();
+            String serie = txtSerie.getText();
+            String cliente = txtCliente.getText();
+            String[] values = {marca, versao, serie, cliente};
+            DatabaseManager.insertAll("Aparelhos", values);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         atualizarTabela();
-        limparCamposClientes();
+        limparCampos();
     }
 
     @FXML
-    public void editarClientes(ActionEvent event) {
-        Clientes selecionado = tabelaCliente.getSelectionModel().getSelectedItem();
+    public void editarAparelho(ActionEvent event) {
+        Aparelhos selecionado = tabelaAparelho.getSelectionModel().getSelectedItem();
         if (selecionado != null) {
             try {
-                DatabaseManager.select("Clientes", "*",
+                DatabaseManager.select("Aparelhos", "*",
                         "ID = " + selecionado.getId());
-                String nome = NomeCliente.getText();
-                String cpf = CpfCliente.getText();
-                String telefone = TelefoneCliente.getText();
-                String email = EmailCliente.getText();
-                String[] columns = {"Nome", "CPF", "Telefone", "Email"};
-                String[] values = {nome, cpf, telefone, email};
-                DatabaseManager.updateMany("Clientes", columns, values,
+                String cliente = txtCliente.getText();
+                String marca = txtMarca.getText();
+                String versao = txtVersao.getText();
+                String modelo = txtSerie.getText();
+                String[] columns = {"Marca", "Versao", "Serie", "Cliente"};
+                String[] values = {marca, versao, modelo, cliente};
+                DatabaseManager.updateMany("Aparelhos", columns, values,
                         "ID = " + selecionado.getId());
             } catch (SQLException e) {
                 System.out.println("Erro ao editar: " + e.getMessage());
             }
         }
         atualizarTabela();
-        limparCamposClientes();
+        limparCampos();
     }
 
     @FXML
-    public void removerClientes(ActionEvent event) {
-        Clientes selecionado = tabelaCliente.getSelectionModel().getSelectedItem();
+    public void excluirAparelho(ActionEvent event) {
+        Aparelhos selecionado = tabelaAparelho.getSelectionModel().getSelectedItem();
         if (selecionado != null) {
             try {
-                DatabaseManager.delete("Clientes", "ID = " + selecionado.getId());
+                DatabaseManager.delete("Aparelhos", "ID = " + selecionado.getId());
             } catch(SQLException e) {
                 System.out.println("Erro ao deletar: " + e.getMessage());
             }
         }
         atualizarTabela();
-        limparCamposClientes();
+        limparCampos();
     }
 
     @FXML
-    public void selecionarCliente() {
-        Clientes cliente = tabelaCliente.getSelectionModel().getSelectedItem();
-        if (cliente != null) {
-            NomeCliente.setText(cliente.getNome());
-            CpfCliente.setText(cliente.getCpf());
-            TelefoneCliente.setText(cliente.getTelefone());
-            EmailCliente.setText(cliente.getEmail());
+    public void selecionarAparelho() {
+        Aparelhos aparelho = tabelaAparelho.getSelectionModel().getSelectedItem();
+        if (aparelho != null) {
+            txtVersao.setText(aparelho.getVersao());
+            txtMarca.setText(aparelho.getMarca());
+            txtSerie.setText(aparelho.getSerie());
+            txtCliente.setText(aparelho.getCliente());
         }
     }
 
 
     @FXML
-    public void onBuscarClick(ActionEvent event) {
+    public void pesquisarAparelho() {
         String filtro = "'%" + campoBusca.getText() + "%'";
         try{
-            List<Clientes> resultados = DatabaseManager.getListClientes("CAST(id as CHAR)", filtro);
-            tabelaCliente.setItems(FXCollections.observableArrayList(resultados));
+            List<Aparelhos> resultados = DatabaseManager.getListAparelhos("CAST(id as CHAR)", filtro);
+            tabelaAparelho.setItems(FXCollections.observableArrayList(resultados));
         } catch(SQLException e) {
             System.out.println("Erro ao buscar: " + e.getMessage());
         }

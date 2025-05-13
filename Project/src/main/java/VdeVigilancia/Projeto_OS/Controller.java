@@ -1,8 +1,6 @@
  package VdeVigilancia.Projeto_OS;
 
-import VdeVigilancia.Projeto_OS.Dominio.Clientes;
-import VdeVigilancia.Projeto_OS.Dominio.JPAUtil;
-import VdeVigilancia.Projeto_OS.Dominio.Usuarios;
+import VdeVigilancia.Projeto_OS.Database.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,21 +10,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import org.bouncycastle.crypto.agreement.jpake.JPAKEUtil;
 
-import javax.persistence.EntityManager;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.sql.SQLException;
 
-public class Controller {
+ public class Controller {
 
     public Button botaoFiltrar;
     @FXML
     Button BotaoCadastrarCliente, BotaoEntrar, CadastrarUsuario;
 
     @FXML
-    MenuItem BotaoCliente, BotaoUsuario, BotaoOS;
+    MenuItem BotaoCliente, BotaoUsuario, BotaoOS, BotaoAparelho;
+
+    @FXML
+    TextField fieldLoginEmail, fieldLoginSenha;
 
     @FXML
     protected void abrirTelaCliente() {
@@ -44,9 +41,31 @@ public class Controller {
     }
 
     @FXML
+    protected void abrirTelaAparelho() {
+         changeScreen(BotaoAparelho, "/TelaAparelho.fxml");
+     }
+
+    @FXML
     protected void abrirTelaUsuario() {
         changeScreen(BotaoUsuario, "/TelaUsuario.fxml");
     }
+
+    @FXML
+    protected void onEntrarButtonClicked() {
+        String email = fieldLoginEmail.getText();
+        String senha = fieldLoginSenha.getText();
+        try {
+            if (email.isEmpty() || senha.isEmpty()) {
+                System.out.println("empty");
+            }
+            else if(DatabaseManager.checkLogin(email, senha)) {
+                abrirTelaInicio();
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     protected void changeScreen(Button currentButton, String screen) {
