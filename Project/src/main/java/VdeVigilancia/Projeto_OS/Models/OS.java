@@ -2,7 +2,7 @@ package VdeVigilancia.Projeto_OS.Models;
 
 public class OS {
     private Integer id;
-    private Integer cliente;
+    private String cliente;
     private String aparelho;
     private String servico;
     private Double valor_total;
@@ -16,11 +16,11 @@ public class OS {
         this.id = id;
     }
 
-    public Integer getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Integer cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
