@@ -17,6 +17,8 @@ import java.sql.Statement;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import static VdeVigilancia.Projeto_OS.Database.DatabaseManager.defaultTables;
+
 @SpringBootApplication
 public class ProjetoOSApplication extends Application {
 
@@ -25,7 +27,7 @@ public class ProjetoOSApplication extends Application {
 		// SpringApplication.run(BancoInterApplication.class, args);
 		try {
 			DatabaseManager.connectDB();
-			DatabaseManager.defaultTables();
+			defaultTables();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

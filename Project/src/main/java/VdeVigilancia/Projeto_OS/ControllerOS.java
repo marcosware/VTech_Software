@@ -59,8 +59,8 @@ public class ControllerOS {
         colunaID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         colunaAparelho.setCellValueFactory(new PropertyValueFactory<>("aparelho"));
-        colunaValorTotal.setCellValueFactory(new PropertyValueFactory<>("serviço"));
-        colunaServico.setCellValueFactory(new PropertyValueFactory<>("valor_total"));
+        colunaValorTotal.setCellValueFactory(new PropertyValueFactory<>("valor_total"));
+        colunaServico.setCellValueFactory(new PropertyValueFactory<>("servico"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         usuarioLogado.setText(DatabaseManager.nomeLogged);
         dataAtual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -72,7 +72,7 @@ public class ControllerOS {
             String where = "Cliente = '" + txtCliente.getText() + "'";
             ObservableList<Aparelhos> aparelhos = DatabaseManager.getListAparelhos(where, "");
             for(int i = 0; i < aparelhos.size(); i++) {
-                menuAparelhos.getItems().add(aparelhos.get(i).getVersao());
+                menuAparelhos.getItems().add(aparelhos.get(i).getMarca() + " " + aparelhos.get(i).getVersao());
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -137,7 +137,7 @@ public class ControllerOS {
                 String valorTotal = txtValorTotal.getText();
                 RadioButton selectedRadioButton = (RadioButton) statusGroup.getSelectedToggle();
                 String status = selectedRadioButton.getText();
-                String[] columns = {"Cliente", "Aparelho", "Serviço", "ValorTotal", "Status"};
+                String[] columns = {"Cliente", "Aparelho", "Servico", "ValorTotal", "Status"};
                 String[] values = {cliente, aparelho, servico, valorTotal, status};
                 DatabaseManager.updateMany("OS", columns, values,
                         "ID = " + selecionado.getId());

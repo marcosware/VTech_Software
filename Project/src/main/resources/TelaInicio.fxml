@@ -43,31 +43,31 @@
             <Image url="@Imagens/fundo-de-cor-simples-4nyuafvmzjeboev9.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="126.0" layoutX="678.0" layoutY="207.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-      <Label layoutX="686.0" layoutY="221.0" text="Usuário:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="686.0" layoutY="273.0" text="Data:" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="Usuario" layoutX="686.0" layoutY="247.0" prefHeight="26.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="Data" layoutX="686.0" layoutY="296.0" prefHeight="21.0" prefWidth="157.0" text="asjvjhvas[" textFill="#b3bcff">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="442.0" fitWidth="515.0" layoutX="87.0" layoutY="62.0">
          <image>
             <Image url="@Imagens/LogoApp.png" />
          </image>
       </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="72.0" layoutX="691.0" layoutY="458.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="696.0" layoutY="463.0" text="Usuário:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="694.0" layoutY="497.0" prefHeight="27.0" prefWidth="49.0" text="Data:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="usuarioLogado" layoutX="774.0" layoutY="463.0" prefHeight="26.0" prefWidth="111.0" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="dataAtual" layoutX="774.0" layoutY="497.0" prefHeight="26.0" prefWidth="102.0" textFill="#b3bcff">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

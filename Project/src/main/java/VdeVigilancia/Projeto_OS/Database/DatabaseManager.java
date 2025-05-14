@@ -15,7 +15,7 @@ public class DatabaseManager {
     public static String nomeLogged;
 
     public static void connectDB() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306";
+        String url = "jdbc:mysql://localhost:3306/banco_Vtech";
         String user = "root";
         String password = null;
         try (Connection conn = DriverManager.getConnection(url, user, null)) {
@@ -55,7 +55,7 @@ public class DatabaseManager {
         };
         DatabaseManager.createTable("Aparelhos", aparelhosColumns, aparelhosDataTypes);
 
-        String[] OSColumns = {"ID", "Cliente", "Aparelho", "Serviço", "ValorTotal", "Status"};
+        String[] OSColumns = {"ID", "Cliente", "Aparelho", "Servico", "ValorTotal", "Status"};
         String[] OSDataTypes = {"INT AUTO_INCREMENT PRIMARY KEY",
                 "CHAR(11) NOT NULL",
                 "VARCHAR(255)",
@@ -79,8 +79,8 @@ public class DatabaseManager {
         String[] loggedColumns = {"ID", "CPF"};
         String[] loggedDataTypes = {"INT AUTO_INCREMENT PRIMARY KEY", "CHAR(11) NOT NULL, FOREIGN KEY (CPF) REFERENCES CLIENTES (CPF)"};
         DatabaseManager.createTable("Logged", loggedColumns, loggedDataTypes);
-        String[] nullCPF = {"0"};
-        DatabaseManager.insertAll("Logged", nullCPF);
+        // String[] nullCPF = {"0"};
+        // DatabaseManager.insertAll("Logged", nullCPF);
     }
 
     public static void createTable(String table, String[] columns, String[] datatypes) throws SQLException {
@@ -147,6 +147,7 @@ public class DatabaseManager {
         System.out.println(query);
         stmt.execute(query);
     }
+
     public static boolean checkLogin(String email, String senha) throws SQLException {
         Connection conn = ClassConnection.getConnection();
         Statement stmt = conn.createStatement();
@@ -217,11 +218,13 @@ public class DatabaseManager {
         while(rs.next()) {
             OS OS_single = new OS();
             OS_single.setId(rs.getInt("id"));
-            OS_single.setCliente(rs.getInt("cliente"));
+            OS_single.setCliente(rs.getString("cliente"));
             OS_single.setAparelho(rs.getString("aparelho"));
-            OS_single.setServico(rs.getString("serviço"));
+            OS_single.setServico(rs.getString("servico"));
             OS_single.setValor_total(rs.getDouble("valortotal"));
-            OS_single.setStatus(Status.valueOf(rs.getString("status").toUpperCase()));
+            String statusString = rs.getString("status").toUpperCase();
+            if(statusString.equals("EM ANDAMENTO")) statusString = "EM_ANDAMENTO";
+            OS_single.setStatus(Status.valueOf(statusString));
             OSs.add(OS_single);
         }
         return OSs;
@@ -252,7 +255,7 @@ public class DatabaseManager {
         for(int i = 0; i < columns.length - 1; i++) {
             query += columns[i];
             query += " = '";
-            if(values[i].isEmpty()) values[i] = "NULL";
+            if(values[i] == null) values[i] = "NULL";
             query += values[i];
             query += "', ";
         }

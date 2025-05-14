@@ -11,7 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
  public class Controller {
 
@@ -24,6 +28,9 @@ import java.sql.SQLException;
 
     @FXML
     TextField fieldLoginEmail, fieldLoginSenha;
+
+    @FXML
+    Label usuarioLogado, dataAtual;
 
     @FXML
     protected void abrirTelaCliente() {
@@ -49,6 +56,15 @@ import java.sql.SQLException;
     protected void abrirTelaUsuario() {
         changeScreen(BotaoUsuario, "/TelaUsuario.fxml");
     }
+
+
+
+    /* @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        usuarioLogado.setText(DatabaseManager.nomeLogged);
+        dataAtual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+    } */
 
     @FXML
     protected void onEntrarButtonClicked() {
